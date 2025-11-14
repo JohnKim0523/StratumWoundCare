@@ -1,10 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,8 +18,17 @@ export default function Navbar() {
       }
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    handleResize(); // Check initial size
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const navLinks = [
@@ -28,58 +40,132 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full shadow-lg transition-all duration-500 ease-in-out`}
+      className="fixed top-0 left-0 right-0 z-50 w-full shadow-lg transition-all duration-500 ease-in-out"
       style={{
-        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.5)',
-        backdropFilter: isScrolled ? 'none' : 'blur(8px)',
-        padding: isScrolled ? '1rem 0' : '2rem 0'
+        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.3)',
+        padding: isMobile
+          ? (isScrolled ? '0.75rem 0' : '1rem 0')
+          : (isScrolled ? '0.875rem 0' : '1.75rem 0')
       }}
     >
-      <div className="w-full" style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-        <div className="flex justify-between items-center">
-          {/* Left Side - Navigation Links */}
-          <div className="flex items-center" style={{ gap: '2.5rem' }}>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`font-medium transition-all duration-300 whitespace-nowrap hover:-translate-y-1 ${
-                  isScrolled ? 'text-sm' : 'text-base'
-                }`}
-                style={{
-                  color: '#ffffff',
-                  paddingBottom: '4px',
-                  borderBottom: '2px solid transparent'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderBottom = '2px solid #fbbf24';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderBottom = '2px solid transparent';
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+      <div className="w-full" style={{
+        paddingLeft: isMobile ? '1rem' : '4rem',
+        paddingRight: isMobile ? '1rem' : '4rem'
+      }}>
+        <div className="flex items-center" style={{ position: 'relative' }}>
+          {/* Left: Desktop Navigation Links */}
+          {!isMobile && (
+            <div className="flex items-center" style={{ gap: '2.5rem', flex: 1 }}>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-medium transition-all duration-300 whitespace-nowrap hover:-translate-y-1"
+                  style={{
+                    color: '#ffffff',
+                    paddingBottom: '4px',
+                    borderBottom: '2px solid transparent',
+                    fontSize: isScrolled ? '0.875rem' : '1rem'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderBottom = '2px solid #fbbf24';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderBottom = '2px solid transparent';
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
 
-          {/* Right Side - Request Appointment Button */}
+          {/* Mobile Menu Button */}
+          {isMobile && (
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-white p-2"
+              style={{ fontSize: '1.5rem' }}
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          )}
+
+          {/* Center: Logo */}
           <Link
-            href="/contact"
-            className="font-bold transition-all duration-300 whitespace-nowrap hover:scale-105"
+            href="/"
             style={{
-              backgroundColor: '#f8bbd0',
-              color: '#000000',
-              borderRadius: '8px',
-              border: '2px solid #f8bbd0',
-              boxShadow: '0 2px 8px rgba(248, 187, 208, 0.3)',
-              padding: isScrolled ? '0.875rem 2rem' : '1.5rem 3.5rem',
-              fontSize: isScrolled ? '0.875rem' : '1.125rem'
+              position: isMobile ? 'relative' : 'absolute',
+              left: isMobile ? 'auto' : '50%',
+              transform: isMobile ? 'none' : 'translateX(-50%)',
+              transition: 'all 0.5s ease-in-out',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: isMobile ? '0 auto' : '0'
             }}
           >
-            Request Appointment
+            <Image
+              src="/logo.png"
+              alt="Stratum Wound Care"
+              width={isScrolled ? (isMobile ? 110 : 160) : (isMobile ? 140 : 220)}
+              height={isScrolled ? (isMobile ? 38 : 55) : (isMobile ? 48 : 76)}
+              style={{
+                transition: 'all 0.5s ease-in-out',
+                objectFit: 'contain'
+              }}
+              priority
+            />
           </Link>
+
+          {/* Right: Request Appointment Button */}
+          <div style={{ flex: isMobile ? 0 : 1, display: 'flex', justifyContent: 'flex-end' }}>
+            <Link
+              href="/contact"
+              className="font-bold transition-all duration-300 whitespace-nowrap hover:scale-105"
+              style={{
+                backgroundColor: '#f8bbd0',
+                color: '#000000',
+                borderRadius: '8px',
+                border: '2px solid #f8bbd0',
+                boxShadow: '0 2px 8px rgba(248, 187, 208, 0.3)',
+                padding: isMobile
+                  ? '0.6rem 1rem'
+                  : (isScrolled ? '0.8rem 1.85rem' : '1.35rem 3.2rem'),
+                fontSize: isMobile ? '0.75rem' : (isScrolled ? '0.875rem' : '1.05rem')
+              }}
+            >
+              {isMobile ? 'Request' : 'Request Appointment'}
+            </Link>
+          </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobile && isMobileMenuOpen && (
+          <div style={{
+            marginTop: '1rem',
+            paddingTop: '1rem',
+            borderTop: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: '#ffffff',
+                    fontSize: '1rem',
+                    fontWeight: '500',
+                    padding: '0.5rem 0'
+                  }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

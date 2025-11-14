@@ -1,18 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PageTransition from '@/components/PageTransition';
+import Icon from '@/components/Icon';
+import ImagePlaceholder from '@/components/ImagePlaceholder';
+import Link from 'next/link';
 
 export default function ContactPage() {
+  const [windowWidth, setWindowWidth] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    serviceInterest: '',
+    preferredContact: 'email',
+    appointmentType: '',
+    insurance: '',
     message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -41,7 +58,9 @@ export default function ContactPage() {
           name: '',
           email: '',
           phone: '',
-          serviceInterest: '',
+          preferredContact: 'email',
+          appointmentType: '',
+          insurance: '',
           message: '',
         });
       } else {
@@ -55,96 +74,267 @@ export default function ContactPage() {
   };
 
   return (
-    <div>
-      {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-primary-100">
-            Get in touch with our team for appointments, questions, or information
+    <PageTransition>
+    <div style={{ paddingTop: '130px' }}>
+      {/* Hero Header Section */}
+      <section style={{
+        backgroundColor: '#111827',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h1 style={{
+            fontSize: isMobile ? '2.5rem' : isTablet ? '3rem' : '3.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Contact Us
+          </h1>
+          <p style={{
+            fontSize: isMobile ? '1.125rem' : isTablet ? '1.25rem' : '1.5rem',
+            color: '#d1d5db',
+            maxWidth: '800px'
+          }}>
+            Get in touch with our team for appointments, questions, or information about our wound care services
           </p>
         </div>
       </section>
 
-      {/* Contact Information & Form */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Get In Touch</h2>
-              <p className="text-gray-700 mb-8">
-                We're here to help you with your wound care needs. Contact us by phone, email, or use the form
-                to schedule an appointment or ask a question.
+      {/* Contact Information Cards */}
+      <section style={{
+        backgroundColor: '#ffffff',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+            gap: isMobile ? '1.5rem' : '2rem'
+          }}>
+            {/* Phone */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <Icon type="phone" size={40} color="#6b7280" />
+              </div>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Phone
+              </h3>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6',
+                marginBottom: '0.5rem'
+              }}>
+                Main: <a href="tel:555-123-4567" style={{ color: '#111827', fontWeight: '600' }}>(555) 123-4567</a>
               </p>
-
-              {/* Contact Details */}
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <span className="text-primary-600 text-xl">📞</span>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Phone</h3>
-                    <p className="text-gray-700">Main: (555) 123-4567</p>
-                    <p className="text-gray-700">Provider Line: (555) 123-4568</p>
-                    <p className="text-gray-700">Emergency: (555) 123-9999</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <span className="text-primary-600 text-xl">📧</span>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                    <p className="text-gray-700">info@stratumwoundcare.com</p>
-                    <p className="text-gray-700">referrals@stratumwoundcare.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <span className="text-primary-600 text-xl">📍</span>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Location</h3>
-                    <p className="text-gray-700">123 Healthcare Drive</p>
-                    <p className="text-gray-700">Suite 100</p>
-                    <p className="text-gray-700">Orange County, PA 17050</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <span className="text-primary-600 text-xl">🕒</span>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Office Hours</h3>
-                    <p className="text-gray-700">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                    <p className="text-gray-700">Saturday: 9:00 AM - 1:00 PM</p>
-                    <p className="text-gray-700">Sunday: Closed</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Emergency Notice */}
-              <div className="mt-8 bg-red-50 border-l-4 border-red-500 p-4 rounded">
-                <p className="text-red-800 font-semibold">Medical Emergency?</p>
-                <p className="text-red-700 text-sm">
-                  If you are experiencing a medical emergency, please call 911 or go to the nearest emergency room.
-                </p>
-              </div>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6',
+                marginBottom: '0.5rem'
+              }}>
+                Provider: <a href="tel:555-123-4568" style={{ color: '#111827', fontWeight: '600' }}>(555) 123-4568</a>
+              </p>
+              <p style={{
+                color: '#dc2626',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6',
+                fontWeight: '600'
+              }}>
+                Emergency: <a href="tel:555-123-9999" style={{ color: '#dc2626' }}>(555) 123-9999</a>
+              </p>
             </div>
 
-            {/* Contact Form */}
-            <div className="bg-gray-50 p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+            {/* Email */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <Icon type="mail" size={40} color="#6b7280" />
+              </div>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Email
+              </h3>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6',
+                marginBottom: '0.5rem'
+              }}>
+                <a href="mailto:info@stratumwoundcare.com" style={{ color: '#111827', fontWeight: '600', textDecoration: 'underline' }}>
+                  info@stratumwoundcare.com
+                </a>
+              </p>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6'
+              }}>
+                <a href="mailto:referrals@stratumwoundcare.com" style={{ color: '#111827', fontWeight: '600', textDecoration: 'underline' }}>
+                  referrals@stratumwoundcare.com
+                </a>
+              </p>
+            </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Location */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <Icon type="mapPin" size={40} color="#6b7280" />
+              </div>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Location
+              </h3>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6',
+                marginBottom: '0.5rem'
+              }}>
+                55R Broadway<br />
+                Bangor, PA 18013
+              </p>
+              <Link
+                href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#111827',
+                  fontSize: isMobile ? '0.875rem' : '1rem',
+                  fontWeight: '600',
+                  textDecoration: 'underline'
+                }}
+              >
+                Get Directions →
+              </Link>
+            </div>
+
+            {/* Office Hours */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <Icon type="clock" size={40} color="#6b7280" />
+              </div>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Office Hours
+              </h3>
+              <p style={{
+                color: '#374151',
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                lineHeight: '1.6'
+              }}>
+                Mon - Fri: 8:00 AM - 5:00 PM<br />
+                Saturday: 9:00 AM - 1:00 PM<br />
+                Sunday: Closed
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comprehensive Contact Form Section */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile || isTablet ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '3rem' : '4rem',
+            alignItems: 'start'
+          }}>
+            {/* Left: Contact Form */}
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              padding: isMobile ? '2rem' : '3rem',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+            }}>
+              <h2 style={{
+                fontSize: isMobile ? '2rem' : '2.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Schedule an Appointment
+              </h2>
+              <p style={{
+                fontSize: isMobile ? '1rem' : '1.125rem',
+                color: '#6b7280',
+                marginBottom: '2rem'
+              }}>
+                Fill out the form below and we'll get back to you within 24 hours
+              </p>
+
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {/* Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Your Name *
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    color: '#374151',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Full Name *
                   </label>
                   <input
                     type="text"
@@ -152,165 +342,473 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      transition: 'border-color 0.3s'
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
+                {/* Email & Phone Row */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                  gap: '1rem'
+                }}>
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      color: '#374151',
+                      marginBottom: '0.5rem'
+                    }}>
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem 1rem',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        transition: 'border-color 0.3s'
+                      }}
+                      onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                      onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      color: '#374151',
+                      marginBottom: '0.5rem'
+                    }}>
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem 1rem',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        transition: 'border-color 0.3s'
+                      }}
+                      onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                      onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                    />
+                  </div>
                 </div>
 
+                {/* Preferred Contact Method */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Service Interest *
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    color: '#374151',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Preferred Contact Method
                   </label>
                   <select
-                    name="serviceInterest"
-                    value={formData.serviceInterest}
+                    name="preferredContact"
+                    value={formData.preferredContact}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      backgroundColor: '#ffffff',
+                      transition: 'border-color 0.3s'
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
                   >
-                    <option value="">Select a service</option>
-                    <option value="diabetic-wounds">Diabetic Wound Care</option>
-                    <option value="pressure-ulcers">Pressure Ulcer Treatment</option>
-                    <option value="surgical-wounds">Surgical Wound Care</option>
-                    <option value="venous-ulcers">Venous Ulcer Treatment</option>
-                    <option value="general-consultation">General Consultation</option>
-                    <option value="other">Other</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
                   </select>
                 </div>
 
+                {/* Appointment Type & Insurance Row */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                  gap: '1rem'
+                }}>
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      color: '#374151',
+                      marginBottom: '0.5rem'
+                    }}>
+                      Appointment Type
+                    </label>
+                    <select
+                      name="appointmentType"
+                      value={formData.appointmentType}
+                      onChange={handleChange}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem 1rem',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        backgroundColor: '#ffffff',
+                        transition: 'border-color 0.3s'
+                      }}
+                      onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                      onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                    >
+                      <option value="">Select Type</option>
+                      <option value="new-patient">New Patient</option>
+                      <option value="follow-up">Follow-Up</option>
+                      <option value="consultation">Consultation</option>
+                      <option value="telehealth">Telehealth</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={{
+                      display: 'block',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      color: '#374151',
+                      marginBottom: '0.5rem'
+                    }}>
+                      Insurance Provider
+                    </label>
+                    <input
+                      type="text"
+                      name="insurance"
+                      value={formData.insurance}
+                      onChange={handleChange}
+                      placeholder="e.g., Medicare, Blue Cross"
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem 1rem',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        transition: 'border-color 0.3s'
+                      }}
+                      onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                      onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                    />
+                  </div>
+                </div>
+
+                {/* Message */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Message *
+                  <label style={{
+                    display: 'block',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    color: '#374151',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Message
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows={5}
-                    placeholder="Please describe your inquiry or provide details about the appointment you'd like to schedule..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="Tell us about your wound care needs or questions..."
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      resize: 'vertical',
+                      fontFamily: 'inherit',
+                      transition: 'border-color 0.3s'
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#111827'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
                   />
                 </div>
 
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:bg-gray-400"
+                  style={{
+                    backgroundColor: '#f8bbd0',
+                    color: '#000000',
+                    padding: '1rem 2rem',
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                    border: 'none',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.3s',
+                    opacity: isSubmitting ? 0.7 : 1
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSubmitting) {
+                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f8bbd0';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? 'Sending...' : 'Submit Request'}
                 </button>
 
+                {/* Status Messages */}
                 {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-semibold">
-                      ✓ Message sent successfully! We'll contact you within 24 hours.
-                    </p>
+                  <div style={{
+                    padding: '1rem',
+                    backgroundColor: '#d1fae5',
+                    border: '1px solid #6ee7b7',
+                    borderRadius: '8px',
+                    color: '#065f46',
+                    fontSize: '0.875rem'
+                  }}>
+                    Thank you! We've received your request and will contact you within 24 hours.
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-800 font-semibold">
-                      ✗ There was an error sending your message. Please call us at (555) 123-4567.
-                    </p>
+                  <div style={{
+                    padding: '1rem',
+                    backgroundColor: '#fee2e2',
+                    border: '1px solid #fca5a5',
+                    borderRadius: '8px',
+                    color: '#991b1b',
+                    fontSize: '0.875rem'
+                  }}>
+                    Sorry, there was an error submitting your request. Please try again or call us directly.
                   </div>
                 )}
               </form>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Map Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Our Location</h2>
+            {/* Right: Additional Information */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '2rem' : '3rem' }}>
+              {/* Map Placeholder */}
+              <div>
+                <h3 style={{
+                  fontSize: isMobile ? '1.5rem' : '2rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '1.5rem'
+                }}>
+                  Visit Our Clinic
+                </h3>
+                <ImagePlaceholder
+                  height={isMobile ? '250px' : '300px'}
+                  text="Interactive Map"
+                  subtext="Click to view directions to our facility"
+                />
+              </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            {/* Placeholder for Google Maps - Replace with actual embed in production */}
-            <div className="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-gray-600 text-lg mb-2">📍 Map Location</p>
-                <p className="text-gray-500 text-sm">123 Healthcare Drive, Suite 100</p>
-                <p className="text-gray-500 text-sm">Orange County, PA 17050</p>
-                <p className="text-primary-600 mt-4">
-                  {/* In production, embed Google Maps here */}
-                  <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-primary-700"
-                  >
-                    Get Directions on Google Maps →
-                  </a>
+              {/* Telehealth Section */}
+              <div style={{
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                padding: isMobile ? '2rem' : '2.5rem',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+              }} id="telehealth">
+                <div style={{ marginBottom: '1rem' }}>
+                  <Icon type="monitor" size={48} color="#6b7280" />
+                </div>
+                <h3 style={{
+                  fontSize: isMobile ? '1.5rem' : '1.75rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '1rem'
+                }}>
+                  Telehealth Visits
+                </h3>
+                <p style={{
+                  color: '#374151',
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  lineHeight: '1.6',
+                  marginBottom: '1.5rem'
+                }}>
+                  Schedule a virtual consultation with our wound care specialists from the comfort of your home. Available Monday through Friday.
                 </p>
+                <Link
+                  href="/contact"
+                  style={{
+                    display: 'inline-block',
+                    backgroundColor: '#111827',
+                    color: '#ffffff',
+                    padding: '0.875rem 1.5rem',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#374151';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#111827';
+                  }}
+                >
+                  Schedule Telehealth Visit →
+                </Link>
+              </div>
+
+              {/* Parking & Accessibility */}
+              <div style={{
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                padding: isMobile ? '2rem' : '2.5rem',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+              }}>
+                <h3 style={{
+                  fontSize: isMobile ? '1.5rem' : '1.75rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '1.5rem'
+                }}>
+                  Facility Information
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'start', gap: '1rem' }}>
+                    <Icon type="car" size={32} color="#6b7280" />
+                    <div>
+                      <h4 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
+                        Parking
+                      </h4>
+                      <p style={{ fontSize: '1rem', color: '#6b7280' }}>
+                        Free on-site parking available
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'start', gap: '1rem' }}>
+                    <Icon type="accessibility" size={32} color="#6b7280" />
+                    <div>
+                      <h4 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
+                        Accessibility
+                      </h4>
+                      <p style={{ fontSize: '1rem', color: '#6b7280' }}>
+                        Wheelchair accessible facility
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'start', gap: '1rem' }}>
+                    <Icon type="bus" size={32} color="#6b7280" />
+                    <div>
+                      <h4 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
+                        Public Transit
+                      </h4>
+                      <p style={{ fontSize: '1rem', color: '#6b7280' }}>
+                        Bus stop on Main Street
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow text-center">
-              <div className="text-3xl mb-3">🚗</div>
-              <h3 className="font-bold text-gray-900 mb-2">Parking</h3>
-              <p className="text-sm text-gray-600">Free parking available on-site</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow text-center">
-              <div className="text-3xl mb-3">♿</div>
-              <h3 className="font-bold text-gray-900 mb-2">Accessibility</h3>
-              <p className="text-sm text-gray-600">Wheelchair accessible facility</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow text-center">
-              <div className="text-3xl mb-3">🚌</div>
-              <h3 className="font-bold text-gray-900 mb-2">Public Transit</h3>
-              <p className="text-sm text-gray-600">Bus stop nearby on Main Street</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Telehealth Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary-50 rounded-2xl p-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Telehealth Available</h2>
-            <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
-              Can't make it to our office? We offer virtual consultations for wound care follow-ups
-              and education. Ask about our telehealth options when you contact us.
-            </p>
-            <button className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
-              Schedule Virtual Visit
-            </button>
-          </div>
+      {/* Emergency Protocol Section */}
+      <section style={{
+        backgroundColor: '#dc2626',
+        paddingTop: isMobile ? '2rem' : '3rem',
+        paddingBottom: isMobile ? '2rem' : '3rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '1.75rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Medical Emergency?
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.25rem',
+            color: '#fecaca',
+            marginBottom: '1.5rem',
+            maxWidth: '800px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            For life-threatening emergencies, call 911 immediately. For urgent wound care needs after hours, call our emergency line.
+          </p>
+          <a
+            href="tel:555-123-9999"
+            style={{
+              display: 'inline-block',
+              backgroundColor: '#ffffff',
+              color: '#dc2626',
+              padding: isMobile ? '1rem 2rem' : '1.25rem 3rem',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: isMobile ? '1.125rem' : '1.25rem',
+              textDecoration: 'none',
+              transition: 'all 0.3s',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+            }}
+          >
+            Call Emergency Line: (555) 123-9999
+          </a>
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

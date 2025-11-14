@@ -1,8 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PageTransition from '@/components/PageTransition';
+import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 export default function CareersPage() {
+  const [windowWidth, setWindowWidth] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +19,16 @@ export default function CareersPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -72,369 +86,503 @@ export default function CareersPage() {
     }
   };
 
-  const openPositions = [
-    {
-      title: "Registered Nurse (RN)",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "Experienced RN with wound care certification to provide direct patient care and treatment",
-      requirements: [
-        "Active PA RN license",
-        "2+ years wound care experience preferred",
-        "CWCN certification a plus",
-        "Excellent communication skills"
-      ]
-    },
-    {
-      title: "Licensed Practical Nurse (LPN)",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "LPN to assist with wound care treatments and patient education under RN supervision",
-      requirements: [
-        "Active PA LPN license",
-        "1+ year clinical experience",
-        "Wound care interest",
-        "Team player attitude"
-      ]
-    },
-    {
-      title: "Nurse Practitioner (NP)",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "Board-certified NP to provide comprehensive wound care and collaborate with physicians",
-      requirements: [
-        "Active PA NP license",
-        "Board certification",
-        "Prescriptive authority",
-        "Wound care experience preferred"
-      ]
-    },
-    {
-      title: "Clinical Director",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "Leadership role overseeing clinical operations and ensuring quality patient care",
-      requirements: [
-        "Advanced practice license (NP or PA)",
-        "5+ years clinical leadership",
-        "Wound care expertise",
-        "Strong organizational skills"
-      ]
-    },
-    {
-      title: "Medical Billing Specialist",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "Billing specialist with healthcare experience to manage insurance claims and payments",
-      requirements: [
-        "Medical billing certification",
-        "2+ years healthcare billing",
-        "Knowledge of Medicare/Medicaid",
-        "Attention to detail"
-      ]
-    },
-    {
-      title: "Patient Care Coordinator",
-      type: "Full-Time",
-      location: "Orange County, PA",
-      description: "Coordinate patient appointments, insurance verification, and administrative support",
-      requirements: [
-        "Healthcare office experience",
-        "Excellent customer service",
-        "Scheduling software proficiency",
-        "Multitasking ability"
-      ]
-    }
-  ];
-
   return (
-    <div>
-      {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold mb-4">Join Our Team</h1>
-          <p className="text-xl text-primary-100">
-            Build a rewarding career in wound care and make a difference in patients' lives
+    <PageTransition>
+    <div style={{ paddingTop: '130px' }}>
+      {/* Hero Header Section */}
+      <section style={{
+        backgroundColor: '#111827',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h1 style={{
+            fontSize: isMobile ? '2.5rem' : isTablet ? '3rem' : '3.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Start Your Career in Wound Management
+          </h1>
+          <p style={{
+            fontSize: isMobile ? '1.25rem' : isTablet ? '1.5rem' : '1.75rem',
+            color: '#ffffff',
+            fontWeight: '600',
+            marginBottom: '0.75rem'
+          }}>
+            Empowerment • Partnership • Results
+          </p>
+          <p style={{
+            fontSize: isMobile ? '1.125rem' : isTablet ? '1.25rem' : '1.5rem',
+            color: '#d1d5db',
+            maxWidth: '900px'
+          }}>
+            Physicians and Advanced Practitioners have built successful practices with Stratum
           </p>
         </div>
       </section>
 
-      {/* Culture Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Work With Us?</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join a team dedicated to excellence in patient care and professional growth
+      {/* Why Join Stratum - Features Grid */}
+      <section style={{
+        backgroundColor: '#ffffff',
+        paddingTop: isMobile ? '3rem' : '5rem',
+        paddingBottom: isMobile ? '3rem' : '5rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            Why Join Stratum Wound Care
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.125rem',
+            color: '#6b7280',
+            textAlign: 'center',
+            marginBottom: isMobile ? '2.5rem' : '3.5rem',
+            maxWidth: '700px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Build a rewarding career with flexibility, impact, and professional growth
+          </p>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gap: isMobile ? '2rem' : '2.5rem'
+          }}>
+            {/* Choose Your Own Schedule */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="calendar" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Choose Your Own Schedule
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Flexibility & Autonomy
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                Join our team and establish an individualized practice with complete flexibility, autonomy, and support. We provide the structure; you set the schedule.
+              </p>
+            </div>
+
+            {/* Improve Patient Outcomes */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="heart" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Improve Patient Outcomes
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Meaningful Impact
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                Partnering with post-acute care facilities to help heal patients, prevent unnecessary hospitalizations, and improve the quality of life for seniors.
+              </p>
+            </div>
+
+            {/* Become an Expert Clinician */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="graduationCap" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Become an Expert Clinician
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Advanced Training
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                We provide comprehensive wound care training and opportunities for professional development, including Stratum's specialized training programs, to continue enhancing your clinical knowledge.
+              </p>
+            </div>
+
+            {/* Focus on Post-Acute Care */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="hospital" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Focus on Post-Acute Care
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Specialized Practice
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                Our clinicians treat complex and challenging chronic wounds at skilled nursing facilities, long-term acute care hospitals, and assisted living facilities.
+              </p>
+            </div>
+
+            {/* Earn a Competitive Salary */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="dollarSign" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Earn a Competitive Salary
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Financial Stability
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                W2 or independent contractor physicians earn competitive salaries plus benefits for flexible work weeks. Part-time opportunities are also available. No call, nights, or weekends.
+              </p>
+            </div>
+
+            {/* Reduced Administrative Burden */}
+            <div style={{
+              backgroundColor: '#f9fafb',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ marginBottom: '1rem' }}><Icon type="clipboard" size={48} color="#6b7280" /></div>
+              <h3 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Reduced Administrative Burden
+              </h3>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                fontWeight: '600',
+                marginBottom: '0.75rem'
+              }}>
+                Support System
+              </p>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                Our proprietary EMR and dedicated administrative support staff handle the logistics, allowing you to focus exclusively on quality patient care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Photo Section */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          {/* Image Placeholder - Team/Office Culture */}
+          <div style={{
+            backgroundColor: '#e5e7eb',
+            borderRadius: '12px',
+            padding: '3rem',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '400px',
+            border: '2px dashed #9ca3af'
+          }}>
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '1rem',
+              marginTop: '1rem',
+              fontWeight: '600'
+            }}>
+              [Team Culture / Office Environment Photo]
+            </p>
+            <p style={{
+              color: '#9ca3af',
+              fontSize: '0.875rem',
+              marginTop: '0.5rem'
+            }}>
+              Suggested: Team meeting, collaborative work environment, or happy staff
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "🎯",
-                title: "Mission-Driven",
-                description: "Work in a purpose-driven environment focused on healing and limb preservation"
-              },
-              {
-                icon: "📚",
-                title: "Continuous Education",
-                description: "Access to training, certifications, and professional development opportunities"
-              },
-              {
-                icon: "👥",
-                title: "Collaborative Culture",
-                description: "Work alongside experienced professionals in a supportive team environment"
-              },
-              {
-                icon: "💰",
-                title: "Competitive Benefits",
-                description: "Comprehensive benefits package including health insurance and retirement"
-              },
-              {
-                icon: "⚖️",
-                title: "Work-Life Balance",
-                description: "Reasonable hours and flexible scheduling to support your personal life"
-              },
-              {
-                icon: "🚀",
-                title: "Growth Opportunities",
-                description: "Career advancement paths and leadership development programs"
-              }
-            ].map((benefit, index) => (
-              <div key={index} className="bg-primary-50 p-6 rounded-lg text-center">
-                <div className="text-5xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-700">{benefit.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Open Positions */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Open Positions</h2>
+      {/* Application Section */}
+      <section style={{
+        backgroundColor: '#ffffff',
+        paddingTop: isMobile ? '3rem' : '5rem',
+        paddingBottom: isMobile ? '3rem' : '5rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            Apply Now
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.125rem',
+            color: '#6b7280',
+            textAlign: 'center',
+            marginBottom: isMobile ? '2.5rem' : '3.5rem',
+            maxWidth: '700px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Submit your application with resume upload and join our team
+          </p>
 
-          <div className="space-y-6">
-            {openPositions.map((position, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{position.title}</h3>
-                    <div className="flex flex-wrap gap-3 text-sm">
-                      <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full font-semibold">
-                        {position.type}
-                      </span>
-                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
-                        📍 {position.location}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
-                      setFormData({ ...formData, position: position.title });
-                    }}
-                    className="mt-4 lg:mt-0 bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-
-                <p className="text-gray-700 mb-4">{position.description}</p>
-
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Requirements:</h4>
-                  <ul className="space-y-1">
-                    {position.requirements.map((req, idx) => (
-                      <li key={idx} className="text-gray-700 text-sm flex items-start">
-                        <span className="text-primary-600 mr-2">•</span>
-                        <span>{req}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Benefits & Perks</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Health & Wellness</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Comprehensive health insurance (medical, dental, vision)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Life and disability insurance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Employee assistance program</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Wellness programs and gym discounts</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Financial Benefits</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Competitive salary commensurate with experience</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">401(k) retirement plan with employer match</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Performance bonuses</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Mileage reimbursement for eligible positions</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Time Off</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Generous paid time off (PTO)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Paid holidays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Sick leave</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Flexible scheduling options</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Professional Development</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Continuing education reimbursement</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Certification support and bonuses</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Conference and training attendance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Mentorship programs</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Application Form */}
-      <section id="application-form" className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Apply Now</h2>
-            <p className="text-gray-600 mb-8">
-              Submit your application and resume to join our team. We review all applications carefully
-              and will contact qualified candidates for interviews.
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Position of Interest *
-                  </label>
-                  <select
-                    name="position"
-                    value={formData.position}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select a position</option>
-                    {openPositions.map((pos, index) => (
-                      <option key={index} value={pos.title}>{pos.title}</option>
-                    ))}
-                  </select>
-                </div>
+          <div style={{
+            maxWidth: '800px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            backgroundColor: '#f9fafb',
+            borderRadius: '12px',
+            padding: isMobile ? '2rem' : '3rem',
+            border: '1px solid #e5e7eb'
+          }}>
+            <form onSubmit={handleSubmit}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem'
+                  }}
+                />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Years of Relevant Experience *
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem'
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Position Interested In *
+                </label>
+                <select
+                  name="position"
+                  value={formData.position}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem'
+                  }}
+                >
+                  <option value="">Select a position</option>
+                  <option value="physician">Physician</option>
+                  <option value="nurse-practitioner">Nurse Practitioner (NP)</option>
+                  <option value="registered-nurse">Registered Nurse (RN)</option>
+                  <option value="licensed-practical-nurse">Licensed Practical Nurse (LPN)</option>
+                  <option value="billing-specialist">Billing Specialist</option>
+                  <option value="clinical-director">Clinical Director</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Years of Experience *
                 </label>
                 <input
                   type="text"
@@ -442,76 +590,120 @@ export default function CareersPage() {
                   value={formData.experience}
                   onChange={handleChange}
                   required
-                  placeholder="e.g., 5 years in wound care nursing"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="e.g., 5 years"
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem'
+                  }}
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Cover Letter / Additional Information
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Cover Letter / Message
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  placeholder="Tell us why you're interested in this position and what makes you a great fit..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="Tell us why you'd like to join Stratum Wound Care..."
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontFamily: 'inherit'
+                  }}
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Upload Resume * (PDF or Word document)
+              <div style={{ marginBottom: '2rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  color: '#374151',
+                  marginBottom: '0.5rem'
+                }}>
+                  Upload Resume *
                 </label>
                 <input
                   type="file"
-                  name="resume"
                   onChange={handleFileChange}
-                  required
                   accept=".pdf,.doc,.docx"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
-                {formData.resume && (
-                  <p className="text-sm text-gray-600 mt-2">
-                    Selected: {formData.resume.name}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex items-start">
-                <input
-                  type="checkbox"
                   required
-                  className="mt-1 mr-3"
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    backgroundColor: '#ffffff'
+                  }}
                 />
-                <p className="text-sm text-gray-700">
-                  I authorize Stratum Wound Care to review my application and contact me regarding
-                  employment opportunities. *
+                <p style={{
+                  fontSize: '0.75rem',
+                  color: '#6b7280',
+                  marginTop: '0.5rem'
+                }}>
+                  Accepted formats: PDF, DOC, DOCX (Max 10MB)
                 </p>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:bg-gray-400"
+                style={{
+                  width: '100%',
+                  backgroundColor: '#111827',
+                  color: '#ffffff',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  border: 'none',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                  opacity: isSubmitting ? 0.6 : 1
+                }}
               >
-                {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
               </button>
 
               {submitStatus === 'success' && (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-800 font-semibold">
-                    ✓ Application submitted successfully! We'll review your materials and contact you soon.
+                <div style={{
+                  marginTop: '1.5rem',
+                  padding: '1rem',
+                  backgroundColor: '#d1fae5',
+                  border: '1px solid #6ee7b7',
+                  borderRadius: '8px'
+                }}>
+                  <p style={{ color: '#065f46', fontWeight: '600' }}>
+                    ✓ Application submitted successfully! We'll review your application and contact you soon.
                   </p>
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-800 font-semibold">
-                    ✗ There was an error submitting your application. Please email your resume to careers@stratumwoundcare.com.
+                <div style={{
+                  marginTop: '1.5rem',
+                  padding: '1rem',
+                  backgroundColor: '#fee2e2',
+                  border: '1px solid #fca5a5',
+                  borderRadius: '8px'
+                }}>
+                  <p style={{ color: '#991b1b', fontWeight: '600' }}>
+                    ✗ There was an error submitting your application. Please try again or email us directly.
                   </p>
                 </div>
               )}
@@ -520,19 +712,57 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Equal Opportunity */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-gray-600">
-              Stratum Wound Care is an Equal Opportunity Employer. We celebrate diversity and are committed
-              to creating an inclusive environment for all employees. All qualified applicants will receive
-              consideration for employment without regard to race, color, religion, sex, sexual orientation,
-              gender identity, national origin, disability, or veteran status.
-            </p>
-          </div>
+      {/* CTA Section */}
+      <section style={{
+        backgroundColor: '#111827',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '1.75rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Questions About Joining Our Team?
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : isTablet ? '1.125rem' : '1.25rem',
+            color: '#d1d5db',
+            marginBottom: '2rem',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Contact us to learn more about career opportunities at Stratum Wound Care
+          </p>
+          <Link
+            href="/contact"
+            style={{
+              backgroundColor: '#f8bbd0',
+              color: '#000000',
+              padding: isMobile ? '0.875rem 2rem' : '1rem 2.5rem',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: isMobile ? '1rem' : '1.125rem',
+              textDecoration: 'none',
+              display: 'inline-block',
+              transition: 'all 0.3s'
+            }}
+          >
+            Contact Us
+          </Link>
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

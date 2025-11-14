@@ -1,303 +1,655 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import PageTransition from '@/components/PageTransition';
+import Icon from '@/components/Icon';
 
 export default function PatientsPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const insuranceCards = [
+    {
+      icon: 'hospital',
+      title: 'Medicare',
+      description: 'We accept all Medicare plans including Medicare Advantage'
+    },
+    {
+      icon: 'shield',
+      title: 'Medicaid',
+      description: 'PA Medicaid and Medical Assistance programs accepted'
+    },
+    {
+      icon: 'briefcase',
+      title: 'Private Insurance',
+      description: 'Most major private insurance plans accepted'
+    }
+  ];
+
+  const checklist = [
+    'Photo ID and insurance card(s)',
+    'List of current medications and dosages',
+    'Recent medical records and test results',
+    'Referral documentation (if required by insurance)',
+    'Completed new patient forms (download below)',
+    'List of allergies',
+    'Medical history including previous surgeries'
+  ];
+
+  const downloadableForms = [
+    {
+      title: 'New Patient Registration Form',
+      description: 'Basic demographic and insurance information'
+    },
+    {
+      title: 'Medical History Form',
+      description: 'Comprehensive health history questionnaire'
+    },
+    {
+      title: 'HIPAA Authorization Form',
+      description: 'Privacy practices and authorization'
+    },
+    {
+      title: 'Consent for Treatment Form',
+      description: 'Treatment consent and acknowledgment'
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "How long do wound healing treatments typically take?",
+      answer: "Healing time varies based on wound type, size, location, and individual health factors. Most patients see significant improvement within 4-8 weeks, though complex wounds may require longer treatment. We provide regular progress assessments and adjust treatment plans as needed."
+    },
+    {
+      question: "Do I need a referral from my primary care physician?",
+      answer: "While some insurance plans require a referral, many do not. We recommend checking with your insurance provider. Medicare and Medicaid typically do not require referrals for wound care services."
+    },
+    {
+      question: "What should I expect during my first visit?",
+      answer: "Your first visit includes a comprehensive wound assessment, medical history review, and development of a personalized treatment plan. The appointment typically lasts 45-60 minutes. We'll explain your diagnosis, treatment options, and answer all your questions."
+    },
+    {
+      question: "How often will I need follow-up appointments?",
+      answer: "Follow-up frequency depends on wound severity and treatment type. Many patients are seen weekly initially, then every 2-4 weeks as healing progresses. We create a schedule that balances optimal care with your convenience."
+    },
+    {
+      question: "What are the costs and billing procedures?",
+      answer: "Costs vary based on treatment type and insurance coverage. We bill your insurance directly and provide cost estimates before treatment. Our billing team can help you understand your coverage and out-of-pocket expenses. We offer payment plans when needed."
+    },
+    {
+      question: "Can I continue wound care at home?",
+      answer: "Yes! We provide comprehensive education on at-home wound care, including proper cleaning, dressing changes, and when to seek emergency care. Many treatments can be done at home between office visits."
+    }
+  ];
+
   return (
-    <div>
-      {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold mb-4">Patient Information</h1>
-          <p className="text-xl text-primary-100">
-            Everything you need to know about your care at Stratum Wound Care
-          </p>
-        </div>
-      </section>
+    <PageTransition>
+      <div style={{ paddingTop: '130px' }}>
+        {/* Header Section */}
+        <section style={{
+          backgroundColor: '#111827',
+          color: '#ffffff',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <h1 style={{
+              fontSize: isMobile ? '2.25rem' : '3rem',
+              fontWeight: '700',
+              marginBottom: '1rem'
+            }}>
+              Patient Information
+            </h1>
+            <p style={{
+              fontSize: isMobile ? '1rem' : '1.25rem',
+              color: '#d1d5db',
+              maxWidth: '800px'
+            }}>
+              Everything you need to know about your care at Stratum Wound Care
+            </p>
+          </div>
+        </section>
 
-      {/* Insurance Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Accepted Insurance</h2>
+        {/* Insurance Section */}
+        <section style={{
+          backgroundColor: '#ffffff',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.25rem',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '3rem',
+              textAlign: 'center'
+            }}>
+              Accepted Insurance
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-primary-50 p-8 rounded-lg text-center">
-              <div className="text-5xl mb-4">🏥</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Medicare</h3>
-              <p className="text-gray-700">
-                We accept all Medicare plans including Medicare Advantage
-              </p>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : (isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'),
+              gap: '2rem',
+              marginBottom: '3rem'
+            }}>
+              {insuranceCards.map((card, index) => (
+                <div key={index} style={{
+                  backgroundColor: '#f9fafb',
+                  padding: '2rem',
+                  borderRadius: '0.5rem',
+                  textAlign: 'center'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                    <Icon type={card.icon as any} size={64} color="#6b7280" />
+                  </div>
+                  <h3 style={{
+                    fontSize: '1.5rem',
+                    fontWeight: '700',
+                    color: '#111827',
+                    marginBottom: '0.75rem'
+                  }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ color: '#4b5563' }}>
+                    {card.description}
+                  </p>
+                </div>
+              ))}
             </div>
 
-            <div className="bg-primary-50 p-8 rounded-lg text-center">
-              <div className="text-5xl mb-4">🏛️</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Medicaid</h3>
-              <p className="text-gray-700">
-                PA Medicaid and Medical Assistance programs accepted
-              </p>
-            </div>
-
-            <div className="bg-primary-50 p-8 rounded-lg text-center">
-              <div className="text-5xl mb-4">💼</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Private Insurance</h3>
-              <p className="text-gray-700">
-                Most major private insurance plans accepted
+            <div style={{
+              backgroundColor: '#f9fafb',
+              padding: '2rem',
+              borderRadius: '0.5rem'
+            }}>
+              <h3 style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#111827',
+                marginBottom: '1.5rem'
+              }}>
+                Major Insurance Providers We Accept
+              </h3>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                gap: '1rem',
+                color: '#4b5563'
+              }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  <li style={{ marginBottom: '0.5rem' }}>• Aetna</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• Blue Cross Blue Shield</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• Cigna</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• Highmark</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• Humana</li>
+                </ul>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  <li style={{ marginBottom: '0.5rem' }}>• Independence Blue Cross</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• UnitedHealthcare</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• WellSpan</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• UPMC</li>
+                  <li style={{ marginBottom: '0.5rem' }}>• And many others</li>
+                </ul>
+              </div>
+              <p style={{ marginTop: '1.5rem', color: '#4b5563' }}>
+                Don't see your insurance listed?{' '}
+                <Link href="/contact" style={{ color: '#2563eb', fontWeight: '600' }}>
+                  Contact us to verify
+                </Link>
               </p>
             </div>
           </div>
+        </section>
 
-          <div className="bg-gray-50 p-8 rounded-lg">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Major Insurance Providers We Accept</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-700">
-              <ul className="space-y-2">
-                <li>• Aetna</li>
-                <li>• Blue Cross Blue Shield</li>
-                <li>• Cigna</li>
-              </ul>
-              <ul className="space-y-2">
-                <li>• Highmark</li>
-                <li>• Humana</li>
-                <li>• Independence Blue Cross</li>
-              </ul>
-              <ul className="space-y-2">
-                <li>• UnitedHealthcare</li>
-                <li>• WellSpan</li>
-                <li>• UPMC</li>
-              </ul>
-              <ul className="space-y-2">
-                <li>• And many others</li>
-                <li className="text-primary-600 font-semibold">
-                  <Link href="/contact">Contact us to verify</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        {/* New Patient Information */}
+        <section style={{
+          backgroundColor: '#f9fafb',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.25rem',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '3rem',
+              textAlign: 'center'
+            }}>
+              New Patient Information
+            </h2>
 
-      {/* New Patient Information */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">New Patient Information</h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gap: '2rem'
+            }}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                padding: '2rem',
+                borderRadius: '0.5rem',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+              }}>
+                <h3 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#111827',
+                  marginBottom: '1.5rem'
+                }}>
+                  What to Bring to Your First Appointment
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {checklist.map((item, index) => (
+                    <li key={index} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      marginBottom: '0.75rem'
+                    }}>
+                      <span style={{ color: '#2563eb', marginRight: '0.75rem', fontSize: '1.25rem' }}>✓</span>
+                      <span style={{ color: '#4b5563' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">What to Bring to Your First Appointment</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Photo ID and insurance card(s)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">List of current medications and dosages</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Recent medical records and test results</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Referral documentation (if required by insurance)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Completed new patient forms (download below)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">List of allergies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3 text-xl">✓</span>
-                  <span className="text-gray-700">Medical history including previous surgeries</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Downloadable Forms</h3>
-              <p className="text-gray-700 mb-6">
-                Complete these HIPAA-compliant forms before your visit to expedite check-in:
-              </p>
-              <div className="space-y-4">
-                <div className="border border-gray-200 p-4 rounded-lg hover:border-primary-600 transition-colors">
-                  <h4 className="font-semibold text-gray-900 mb-2">📄 New Patient Registration Form</h4>
-                  <p className="text-sm text-gray-600 mb-3">Basic demographic and insurance information</p>
-                  <button className="text-primary-600 hover:text-primary-700 font-semibold text-sm">
-                    Download PDF →
-                  </button>
-                </div>
-                <div className="border border-gray-200 p-4 rounded-lg hover:border-primary-600 transition-colors">
-                  <h4 className="font-semibold text-gray-900 mb-2">📄 Medical History Form</h4>
-                  <p className="text-sm text-gray-600 mb-3">Comprehensive health history questionnaire</p>
-                  <button className="text-primary-600 hover:text-primary-700 font-semibold text-sm">
-                    Download PDF →
-                  </button>
-                </div>
-                <div className="border border-gray-200 p-4 rounded-lg hover:border-primary-600 transition-colors">
-                  <h4 className="font-semibold text-gray-900 mb-2">📄 HIPAA Authorization Form</h4>
-                  <p className="text-sm text-gray-600 mb-3">Privacy practices and authorization</p>
-                  <button className="text-primary-600 hover:text-primary-700 font-semibold text-sm">
-                    Download PDF →
-                  </button>
-                </div>
-                <div className="border border-gray-200 p-4 rounded-lg hover:border-primary-600 transition-colors">
-                  <h4 className="font-semibold text-gray-900 mb-2">📄 Consent for Treatment Form</h4>
-                  <p className="text-sm text-gray-600 mb-3">Treatment consent and acknowledgment</p>
-                  <button className="text-primary-600 hover:text-primary-700 font-semibold text-sm">
-                    Download PDF →
-                  </button>
+              <div style={{
+                backgroundColor: '#ffffff',
+                padding: '2rem',
+                borderRadius: '0.5rem',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+              }}>
+                <h3 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#111827',
+                  marginBottom: '1.5rem'
+                }}>
+                  Downloadable Forms
+                </h3>
+                <p style={{ color: '#4b5563', marginBottom: '1.5rem' }}>
+                  Complete these HIPAA-compliant forms before your visit to expedite check-in:
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {downloadableForms.map((form, index) => (
+                    <div key={index} style={{
+                      border: '1px solid #e5e7eb',
+                      padding: '1rem',
+                      borderRadius: '0.5rem',
+                      transition: 'border-color 0.3s'
+                    }}>
+                      <h4 style={{
+                        fontWeight: '600',
+                        color: '#111827',
+                        marginBottom: '0.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                      }}>
+                        <Icon type="fileText" size={20} color="#6b7280" />
+                        {form.title}
+                      </h4>
+                      <p style={{
+                        fontSize: '0.875rem',
+                        color: '#6b7280',
+                        marginBottom: '0.75rem'
+                      }}>
+                        {form.description}
+                      </p>
+                      <button style={{
+                        color: '#2563eb',
+                        fontWeight: '600',
+                        fontSize: '0.875rem',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: 0
+                      }}>
+                        Download PDF →
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Patient Portal */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-primary-700 to-primary-900 rounded-2xl p-12 text-white text-center">
-            <h2 className="text-4xl font-bold mb-6">Patient Portal</h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-              Access your test results, visit summaries, and medical records securely online
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
-                Login to Portal
-              </button>
-              <button className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-500 transition-colors border-2 border-white">
-                Register for Portal
-              </button>
-            </div>
-            <p className="text-sm text-primary-100 mt-6">
-              Secure, HIPAA-compliant 24/7 access to your health information
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
-
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {[
-              {
-                question: "How long do wound healing treatments typically take?",
-                answer: "Healing time varies based on wound type, size, location, and individual health factors. Most patients see significant improvement within 4-8 weeks, though complex wounds may require longer treatment. We provide regular progress assessments and adjust treatment plans as needed."
-              },
-              {
-                question: "Do I need a referral from my primary care physician?",
-                answer: "While some insurance plans require a referral, many do not. We recommend checking with your insurance provider. Medicare and Medicaid typically do not require referrals for wound care services."
-              },
-              {
-                question: "What should I expect during my first visit?",
-                answer: "Your first visit includes a comprehensive wound assessment, medical history review, and development of a personalized treatment plan. The appointment typically lasts 45-60 minutes. We'll explain your diagnosis, treatment options, and answer all your questions."
-              },
-              {
-                question: "How often will I need follow-up appointments?",
-                answer: "Follow-up frequency depends on wound severity and treatment type. Many patients are seen weekly initially, then every 2-4 weeks as healing progresses. We create a schedule that balances optimal care with your convenience."
-              },
-              {
-                question: "What are the costs and billing procedures?",
-                answer: "Costs vary based on treatment type and insurance coverage. We bill your insurance directly and provide cost estimates before treatment. Our billing team can help you understand your coverage and out-of-pocket expenses. We offer payment plans when needed."
-              },
-              {
-                question: "Can I continue wound care at home?",
-                answer: "Yes! We provide comprehensive education on at-home wound care, including proper cleaning, dressing changes, and when to seek emergency care. Many treatments can be done at home between office visits."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-700">{faq.answer}</p>
+        {/* Patient Portal */}
+        <section style={{
+          backgroundColor: '#ffffff',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <div style={{
+              backgroundColor: '#111827',
+              borderRadius: '1rem',
+              padding: isMobile ? '2rem' : '3rem',
+              color: '#ffffff',
+              textAlign: 'center'
+            }}>
+              <h2 style={{
+                fontSize: isMobile ? '1.875rem' : '2.25rem',
+                fontWeight: '700',
+                marginBottom: '1.5rem'
+              }}>
+                Patient Portal
+              </h2>
+              <p style={{
+                fontSize: isMobile ? '1rem' : '1.25rem',
+                color: '#d1d5db',
+                marginBottom: '2rem',
+                maxWidth: '700px',
+                margin: '0 auto 2rem'
+              }}>
+                Access your test results, visit summaries, and medical records securely online
+              </p>
+              <div style={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: '1rem',
+                justifyContent: 'center'
+              }}>
+                <button style={{
+                  backgroundColor: '#ffffff',
+                  color: '#111827',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+                }}>
+                  Login to Portal
+                </button>
+                <button style={{
+                  backgroundColor: '#374151',
+                  color: '#ffffff',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  border: '2px solid #ffffff',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+                }}>
+                  Register for Portal
+                </button>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Billing Guidance */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Billing & Financial Information</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Understanding Your Bill</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>We file claims directly with your insurance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>You are responsible for copays, deductibles, and coinsurance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>Statements are mailed monthly for any patient balance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>Multiple payment options available (check, card, online)</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Financial Assistance</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>Payment plans available for qualifying patients</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>Financial counseling services offered</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>We accept CareCredit and medical financing</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-3">•</span>
-                  <span>
-                    <Link href="/contact" className="text-primary-600 hover:text-primary-700 font-semibold">
-                      Contact our billing team
-                    </Link>
-                    {" "}for assistance
-                  </span>
-                </li>
-              </ul>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#d1d5db',
+                marginTop: '1.5rem'
+              }}>
+                Secure, HIPAA-compliant 24/7 access to your health information
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Have More Questions?</h2>
-          <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">
-            Our team is here to help you understand your care and answer any questions
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
-            >
-              Contact Us
-            </Link>
-            <Link
-              href="/services"
-              className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-500 transition-colors border-2 border-white"
-            >
-              View Our Services
-            </Link>
+        {/* FAQ Section */}
+        <section style={{
+          backgroundColor: '#f9fafb',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.25rem',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '3rem',
+              textAlign: 'center'
+            }}>
+              Frequently Asked Questions
+            </h2>
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              maxWidth: '900px',
+              margin: '0 auto'
+            }}>
+              {faqs.map((faq, index) => (
+                <div key={index} style={{
+                  backgroundColor: '#ffffff',
+                  padding: '1.5rem',
+                  borderRadius: '0.5rem',
+                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+                }}>
+                  <h3 style={{
+                    fontSize: '1.25rem',
+                    fontWeight: '700',
+                    color: '#111827',
+                    marginBottom: '0.75rem'
+                  }}>
+                    {faq.question}
+                  </h3>
+                  <p style={{ color: '#4b5563', lineHeight: '1.6' }}>
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* Billing Guidance */}
+        <section style={{
+          backgroundColor: '#ffffff',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.25rem',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '3rem',
+              textAlign: 'center'
+            }}>
+              Billing & Financial Information
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gap: '2rem'
+            }}>
+              <div style={{
+                backgroundColor: '#f9fafb',
+                padding: '2rem',
+                borderRadius: '0.5rem'
+              }}>
+                <h3 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#111827',
+                  marginBottom: '1rem'
+                }}>
+                  Understanding Your Bill
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>We file claims directly with your insurance</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>You are responsible for copays, deductibles, and coinsurance</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>Statements are mailed monthly for any patient balance</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>Multiple payment options available (check, card, online)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div style={{
+                backgroundColor: '#f9fafb',
+                padding: '2rem',
+                borderRadius: '0.5rem'
+              }}>
+                <h3 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  color: '#111827',
+                  marginBottom: '1rem'
+                }}>
+                  Financial Assistance
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>Payment plans available for qualifying patients</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>Financial counseling services offered</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>We accept CareCredit and medical financing</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                    <span style={{ color: '#2563eb', marginRight: '0.75rem' }}>•</span>
+                    <span style={{ color: '#4b5563' }}>
+                      <Link href="/contact" style={{ color: '#2563eb', fontWeight: '600' }}>
+                        Contact our billing team
+                      </Link>
+                      {' '}for assistance
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section style={{
+          backgroundColor: '#111827',
+          color: '#ffffff',
+          paddingTop: isMobile ? '3rem' : '4rem',
+          paddingBottom: isMobile ? '3rem' : '4rem'
+        }}>
+          <div style={{
+            width: '100%',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.25rem',
+              fontWeight: '700',
+              marginBottom: '1.5rem'
+            }}>
+              Have More Questions?
+            </h2>
+            <p style={{
+              fontSize: isMobile ? '1rem' : '1.25rem',
+              color: '#d1d5db',
+              marginBottom: '2rem',
+              maxWidth: '700px',
+              margin: '0 auto 2rem'
+            }}>
+              Our team is here to help you understand your care and answer any questions
+            </p>
+            <div style={{
+              display: 'flex',
+              flexDirection: isMobile ? 'column' : 'row',
+              gap: '1rem',
+              justifyContent: 'center'
+            }}>
+              <Link
+                href="/contact"
+                style={{
+                  backgroundColor: '#ffffff',
+                  color: '#111827',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  transition: 'background-color 0.3s'
+                }}
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="/services"
+                style={{
+                  backgroundColor: '#374151',
+                  color: '#ffffff',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '0.5rem',
+                  fontWeight: '600',
+                  border: '2px solid #ffffff',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  transition: 'background-color 0.3s'
+                }}
+              >
+                View Our Services
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </PageTransition>
   );
 }

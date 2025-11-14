@@ -1,145 +1,296 @@
+'use client';
+
 import Link from 'next/link';
+import PageTransition from '@/components/PageTransition';
+import { useState, useEffect } from 'react';
+import ImagePlaceholder from '@/components/ImagePlaceholder';
 
 export default function ServicesPage() {
-  const services = [
-    {
-      title: "Chronic Wound Management",
-      description: "Comprehensive care for diabetic, venous, arterial, pressure, and surgical wounds",
-      icon: "🩺",
-      details: [
-        "Diabetic foot ulcers and neuropathic wounds",
-        "Venous stasis ulcers and arterial insufficiency wounds",
-        "Pressure injuries (bedsores)",
-        "Post-surgical wound complications",
-        "Non-healing traumatic wounds"
-      ]
-    },
-    {
-      title: "Debridement & Advanced Dressings",
-      description: "Professional wound cleaning and state-of-the-art dressing applications",
-      icon: "🔬",
-      details: [
-        "Sharp surgical debridement",
-        "Enzymatic and autolytic debridement",
-        "Advanced moisture-retentive dressings",
-        "Antimicrobial and silver dressings",
-        "Foam, hydrocolloid, and alginate dressings"
-      ]
-    },
-    {
-      title: "Negative Pressure Wound Therapy (NPWT)",
-      description: "Advanced vacuum-assisted closure for complex wounds",
-      icon: "⚡",
-      details: [
-        "Portable and stationary NPWT systems",
-        "Wound bed preparation for closure",
-        "Enhanced granulation tissue formation",
-        "Reduced healing time",
-        "Home NPWT management and education"
-      ]
-    },
-    {
-      title: "Grafting Procedures",
-      description: "Skin grafting and bioengineered tissue applications",
-      icon: "🧬",
-      details: [
-        "Autografts and allografts",
-        "Bioengineered skin substitutes",
-        "Cellular tissue products",
-        "Split-thickness skin grafts",
-        "Post-graft wound care"
-      ]
-    },
-    {
-      title: "Hyperbaric Oxygen Therapy (HBOT)",
-      description: "Referral coordination for hyperbaric treatment when indicated",
-      icon: "💨",
-      details: [
-        "Assessment for HBOT candidacy",
-        "Coordination with hyperbaric facilities",
-        "Pre and post-HBOT wound management",
-        "Insurance authorization assistance",
-        "Comprehensive treatment planning"
-      ]
-    },
-    {
-      title: "Infection Control & Limb Preservation",
-      description: "Aggressive infection management to prevent amputations",
-      icon: "🛡️",
-      details: [
-        "Bacterial culture and sensitivity testing",
-        "Targeted antibiotic therapy",
-        "Biofilm management",
-        "Osteomyelitis treatment coordination",
-        "Multi-disciplinary limb salvage programs"
-      ]
-    },
-    {
-      title: "Patient Education",
-      description: "Comprehensive training for at-home wound care success",
-      icon: "📚",
-      details: [
-        "Proper wound cleaning techniques",
-        "Dressing change instructions",
-        "Nutrition for wound healing",
-        "Offloading and pressure relief",
-        "Prevention of recurrence"
-      ]
-    },
-    {
-      title: "Vascular Assessment",
-      description: "Evaluation of blood flow and circulatory issues",
-      icon: "❤️",
-      details: [
-        "Ankle-brachial index (ABI) testing",
-        "Doppler ultrasound coordination",
-        "Arterial and venous insufficiency assessment",
-        "Referral to vascular surgery when needed",
-        "Compression therapy management"
-      ]
-    }
-  ];
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
   return (
-    <div>
-      {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold mb-4">Our Services</h1>
-          <p className="text-xl text-primary-100">
+    <PageTransition>
+    <div style={{ paddingTop: '130px' }}>
+      {/* Hero Header Section */}
+      <section style={{
+        backgroundColor: '#111827',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h1 style={{
+            fontSize: isMobile ? '2.5rem' : isTablet ? '3rem' : '3.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Our Services
+          </h1>
+          <p style={{
+            fontSize: isMobile ? '1.125rem' : isTablet ? '1.25rem' : '1.5rem',
+            color: '#d1d5db',
+            maxWidth: '800px'
+          }}>
             Comprehensive wound care solutions using advanced treatments and evidence-based protocols
           </p>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete Wound Care Solutions</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From initial assessment to complete healing, we provide comprehensive care tailored to your specific needs
-            </p>
+      {/* Wound Types We Treat */}
+      <section style={{
+        backgroundColor: '#ffffff',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            Wound Types We Treat
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.125rem',
+            color: '#6b7280',
+            textAlign: 'center',
+            marginBottom: isMobile ? '2rem' : '3rem',
+            maxWidth: '700px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Expert care for a wide range of acute and chronic wounds
+          </p>
+
+          {/* Wound Types Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gap: isMobile ? '1.5rem' : '2rem',
+            marginBottom: isMobile ? '3rem' : '4rem'
+          }}>
+            {[
+              {
+                title: "Diabetic Foot Ulcers",
+                description: "Comprehensive care for diabetic foot complications including neuropathic and ischemic ulcers. Our specialized approach focuses on preventing amputations and promoting healing."
+              },
+              {
+                title: "Pressure Injuries",
+                description: "Expert treatment of pressure ulcers (bedsores) at all stages. We provide advanced wound care protocols to heal existing wounds and prevent recurrence."
+              },
+              {
+                title: "Wound Infections",
+                description: "Aggressive management of infected wounds with targeted antibiotic therapy, debridement, and advanced wound care techniques."
+              },
+              {
+                title: "Chronic Soft Tissue Infections",
+                description: "Long-term management and treatment of persistent soft tissue infections that require specialized care and monitoring."
+              },
+              {
+                title: "Chronic Bone Infections",
+                description: "Expert care for osteomyelitis and chronic bone infections requiring multi-disciplinary treatment approaches."
+              },
+              {
+                title: "Venous Leg Ulcers",
+                description: "Specialized treatment for ulcers caused by venous insufficiency, including compression therapy and advanced wound care."
+              },
+              {
+                title: "Arterial Ulcers",
+                description: "Management of wounds caused by arterial insufficiency with focus on improving circulation and promoting healing."
+              },
+              {
+                title: "Surgical Wounds",
+                description: "Post-operative wound care including management of dehiscence, infection, and delayed healing."
+              },
+              {
+                title: "Atypical Wounds",
+                description: "Diagnosis and treatment of unusual or complex wound types that require specialized expertise and care."
+              }
+            ].map((wound, index) => (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: '#f9fafb',
+                  borderRadius: '12px',
+                  padding: isMobile ? '1.5rem' : '2rem',
+                  border: '1px solid #e5e7eb',
+                  transition: 'all 0.3s',
+                  cursor: 'default'
+                }}
+              >
+                <h3 style={{
+                  fontSize: isMobile ? '1.25rem' : '1.5rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '1rem'
+                }}>
+                  {wound.title}
+                </h3>
+                <p style={{
+                  fontSize: isMobile ? '0.875rem' : '1rem',
+                  color: '#374151',
+                  lineHeight: '1.6'
+                }}>
+                  {wound.description}
+                </p>
+              </div>
+            ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow">
-                <div className="flex items-start mb-4">
-                  <div className="text-5xl mr-4">{service.icon}</div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-                  </div>
+          {/* Image Placeholder - Wound Care Facility */}
+          <ImagePlaceholder
+            height={isMobile ? '250px' : '350px'}
+            text="Advanced Wound Care Treatment Room"
+            subtext="Modern equipment and sterile environment for optimal healing"
+          />
+        </div>
+      </section>
+
+      {/* Advanced Treatment Methods */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            Advanced Treatment Methods
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.125rem',
+            color: '#6b7280',
+            textAlign: 'center',
+            marginBottom: isMobile ? '2rem' : '3rem',
+            maxWidth: '700px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Cutting-edge techniques and technologies for optimal wound healing
+          </p>
+
+          {/* Treatment Methods Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile || isTablet ? '1fr' : 'repeat(2, 1fr)',
+            gap: isMobile ? '2rem' : '3rem'
+          }}>
+            {[
+              {
+                title: "Negative Pressure Therapy (Wound VAC)",
+                description: "Advanced vacuum-assisted closure technology that promotes wound healing through controlled negative pressure. Reduces healing time and enhances granulation tissue formation.",
+                imagePlaceholder: "[Wound VAC Device Photo]"
+              },
+              {
+                title: "Surgical Debridement",
+                description: "Professional removal of non-viable tissue using surgical techniques to prepare the wound bed for optimal healing.",
+                imagePlaceholder: "[Surgical Debridement Photo]"
+              },
+              {
+                title: "Water Debridement",
+                description: "Hydrotherapy-based wound cleaning that uses controlled water pressure to gently remove debris and promote healing.",
+                imagePlaceholder: "[Water Debridement System Photo]"
+              },
+              {
+                title: "Ultrasonic Debridement",
+                description: "State-of-the-art ultrasonic technology for precise, gentle removal of biofilm and non-viable tissue while preserving healthy tissue.",
+                imagePlaceholder: "[Ultrasonic Device Photo]"
+              }
+            ].map((treatment, index) => (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  padding: isMobile ? '1.5rem' : '2rem',
+                  border: '1px solid #e5e7eb',
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? '1fr' : '200px 1fr',
+                  gap: isMobile ? '1.5rem' : '2rem',
+                  alignItems: 'start'
+                }}
+              >
+                {/* Image Placeholder */}
+                <div style={{
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '180px',
+                  border: '2px dashed #9ca3af'
+                }}>
+                  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                  <p style={{
+                    color: '#6b7280',
+                    fontSize: '0.75rem',
+                    marginTop: '0.75rem',
+                    fontWeight: '600'
+                  }}>
+                    {treatment.imagePlaceholder}
+                  </p>
                 </div>
-                <ul className="space-y-2">
-                  {service.details.map((detail, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <span className="text-primary-600 mr-2">•</span>
-                      <span className="text-gray-700 text-sm">{detail}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                {/* Content */}
+                <div>
+                  <h3 style={{
+                    fontSize: isMobile ? '1.25rem' : '1.5rem',
+                    fontWeight: 'bold',
+                    color: '#111827',
+                    marginBottom: '1rem'
+                  }}>
+                    {treatment.title}
+                  </h3>
+                  <p style={{
+                    fontSize: isMobile ? '0.875rem' : '1rem',
+                    color: '#374151',
+                    lineHeight: '1.6'
+                  }}>
+                    {treatment.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -147,181 +298,252 @@ export default function ServicesPage() {
       </section>
 
       {/* Treatment Process */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Our Treatment Process</h2>
+      <section style={{
+        backgroundColor: '#ffffff',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: isMobile ? '2rem' : '3rem',
+            textAlign: 'center'
+          }}>
+            Our Treatment Process
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+            gap: isMobile ? '1.5rem' : '2rem'
+          }}>
             {[
               {
                 step: "1",
                 title: "Initial Assessment",
-                description: "Comprehensive wound evaluation and medical history review"
+                description: "Comprehensive wound evaluation, medical history review, and vascular assessment"
               },
               {
                 step: "2",
                 title: "Treatment Plan",
-                description: "Customized care plan based on wound type and patient needs"
+                description: "Customized care plan based on wound type, severity, and patient-specific needs"
               },
               {
                 step: "3",
                 title: "Active Treatment",
-                description: "Regular treatments with ongoing monitoring and adjustments"
+                description: "Regular treatments with ongoing monitoring, adjustments, and advanced therapies"
               },
               {
                 step: "4",
                 title: "Follow-up Care",
-                description: "Post-healing monitoring and prevention education"
+                description: "Post-healing monitoring, prevention education, and recurrence prevention strategies"
               }
             ].map((phase, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div
+                key={index}
+                style={{
+                  backgroundColor: '#f9fafb',
+                  borderRadius: '12px',
+                  padding: isMobile ? '1.5rem' : '2rem',
+                  border: '1px solid #e5e7eb',
+                  textAlign: 'center'
+                }}
+              >
+                <div style={{
+                  width: '64px',
+                  height: '64px',
+                  backgroundColor: '#111827',
+                  color: '#ffffff',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.75rem',
+                  fontWeight: 'bold',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  marginBottom: '1rem'
+                }}>
                   {phase.step}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{phase.title}</h3>
-                <p className="text-gray-600">{phase.description}</p>
+                <h3 style={{
+                  fontSize: isMobile ? '1.125rem' : '1.25rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '0.75rem'
+                }}>
+                  {phase.title}
+                </h3>
+                <p style={{
+                  fontSize: isMobile ? '0.875rem' : '1rem',
+                  color: '#6b7280',
+                  lineHeight: '1.6'
+                }}>
+                  {phase.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Specializations */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Wound Type Specializations</h2>
+      {/* Why Choose Us */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: isMobile ? '2rem' : '3rem',
+            textAlign: 'center'
+          }}>
+            Why Choose Stratum Wound Care
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                type: "Diabetic Wounds",
-                description: "Expert care for diabetic foot ulcers and complications",
-                stats: "80% limb salvage rate"
-              },
-              {
-                type: "Pressure Ulcers",
-                description: "Stage I-IV pressure injury management",
-                stats: "Advanced healing protocols"
-              },
-              {
-                type: "Surgical Wounds",
-                description: "Post-operative wound complications and dehiscence",
-                stats: "Fast-track healing"
-              },
-              {
-                type: "Venous Ulcers",
-                description: "Compression therapy and advanced treatments",
-                stats: "Recurrence prevention"
-              }
-            ].map((specialty, index) => (
-              <div key={index} className="bg-primary-50 p-6 rounded-lg border-2 border-primary-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{specialty.type}</h3>
-                <p className="text-gray-700 mb-3 text-sm">{specialty.description}</p>
-                <p className="text-primary-600 font-semibold text-sm">{specialty.stats}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technology & Equipment */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Advanced Technology & Equipment</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Diagnostic Tools</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Doppler ultrasound</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Wound measurement systems</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Bacterial culture testing</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>ABI testing equipment</span>
-                </li>
-              </ul>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr' : 'repeat(3, 1fr)',
+            gap: isMobile ? '1.5rem' : '2rem'
+          }}>
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Evidence-Based Care
+              </h3>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                We utilize the latest research and proven protocols to deliver the most effective wound care treatments available.
+              </p>
             </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Treatment Equipment</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>NPWT devices</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Surgical debridement tools</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Compression therapy systems</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Offloading devices</span>
-                </li>
-              </ul>
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Advanced Technology
+              </h3>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                State-of-the-art equipment and treatment methods including NPWT, ultrasonic debridement, and advanced wound care products.
+              </p>
             </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Advanced Products</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Bioengineered tissues</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Antimicrobial dressings</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Growth factor products</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
-                  <span>Cellular matrices</span>
-                </li>
-              </ul>
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              <h3 style={{
+                fontSize: isMobile ? '1.25rem' : '1.5rem',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '1rem'
+              }}>
+                Experienced Team
+              </h3>
+              <p style={{
+                fontSize: isMobile ? '0.875rem' : '1rem',
+                color: '#374151',
+                lineHeight: '1.6'
+              }}>
+                Our healthcare professionals have extensive experience in wound care management and limb preservation.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Begin Your Healing Journey?</h2>
-          <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">
-            Contact us today to schedule a comprehensive wound assessment
+      <section style={{
+        backgroundColor: '#111827',
+        paddingTop: isMobile ? '3rem' : '4rem',
+        paddingBottom: isMobile ? '3rem' : '4rem'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          textAlign: 'center'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '1.75rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#ffffff',
+            marginBottom: '1rem'
+          }}>
+            Ready to Begin Your Healing Journey?
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : isTablet ? '1.125rem' : '1.25rem',
+            color: '#d1d5db',
+            marginBottom: '2rem',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Contact us today to schedule a comprehensive wound assessment and develop a personalized treatment plan
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
-            >
-              Schedule Appointment
-            </Link>
-            <Link
-              href="/patients"
-              className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-500 transition-colors border-2 border-white"
-            >
-              Patient Information
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            style={{
+              backgroundColor: '#f8bbd0',
+              color: '#000000',
+              padding: isMobile ? '0.875rem 2rem' : '1rem 2.5rem',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: isMobile ? '1rem' : '1.125rem',
+              textDecoration: 'none',
+              display: 'inline-block',
+              transition: 'all 0.3s'
+            }}
+          >
+            Schedule Appointment
+          </Link>
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }
