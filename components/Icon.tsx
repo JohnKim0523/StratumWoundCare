@@ -191,6 +191,12 @@ export default function Icon({ type, size = 24, color = '#6b7280' }: IconProps) 
         <path d="M3 10h18"></path>
       </svg>
     ),
+    settings: (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"></path>
+      </svg>
+    ),
   };
 
   return icons[type] || null;
