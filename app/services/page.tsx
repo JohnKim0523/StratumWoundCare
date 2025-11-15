@@ -4,6 +4,7 @@ import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 import { useState, useEffect } from 'react';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
+import { colors } from '@/lib/colors';
 
 export default function ServicesPage() {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -23,7 +24,7 @@ export default function ServicesPage() {
     <div style={{ paddingTop: '130px' }}>
       {/* Hero Header Section */}
       <section style={{
-        backgroundColor: '#111827',
+        backgroundColor: colors.primary.navy,
         paddingTop: isMobile ? '3rem' : '4rem',
         paddingBottom: isMobile ? '3rem' : '4rem'
       }}>
@@ -360,7 +361,7 @@ export default function ServicesPage() {
                 <div style={{
                   width: '64px',
                   height: '64px',
-                  backgroundColor: '#111827',
+                  backgroundColor: colors.primary.navy,
                   color: '#ffffff',
                   borderRadius: '50%',
                   display: 'flex',
@@ -495,7 +496,7 @@ export default function ServicesPage() {
 
       {/* CTA Section */}
       <section style={{
-        backgroundColor: '#111827',
+        backgroundColor: colors.primary.navy,
         paddingTop: isMobile ? '3rem' : '4rem',
         paddingBottom: isMobile ? '3rem' : '4rem'
       }}>
@@ -528,15 +529,17 @@ export default function ServicesPage() {
           <Link
             href="/contact"
             style={{
-              backgroundColor: '#f8bbd0',
-              color: '#000000',
+              background: colors.gradients.blueGreen,
+              color: '#ffffff',
               padding: isMobile ? '0.875rem 2rem' : '1rem 2.5rem',
               borderRadius: '8px',
               fontWeight: 'bold',
               fontSize: isMobile ? '1rem' : '1.125rem',
               textDecoration: 'none',
               display: 'inline-block',
-              transition: 'all 0.3s'
+              transition: 'all 0.3s',
+              border: `2px solid ${colors.primary.blue}`,
+              boxShadow: `0 4px 12px rgba(8, 145, 220, 0.3)`
             }}
           >
             Schedule Appointment

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 import Icon from '@/components/Icon';
+import { colors } from '@/lib/colors';
 
 export default function PatientsPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -99,7 +100,7 @@ export default function PatientsPage() {
       <div style={{ paddingTop: '130px' }}>
         {/* Header Section */}
         <section style={{
-          backgroundColor: '#111827',
+          backgroundColor: colors.primary.navy,
           color: '#ffffff',
           paddingTop: isMobile ? '3rem' : '4rem',
           paddingBottom: isMobile ? '3rem' : '4rem'
@@ -326,7 +327,7 @@ export default function PatientsPage() {
                         {form.description}
                       </p>
                       <button style={{
-                        color: '#2563eb',
+                        color: colors.primary.blue,
                         fontWeight: '600',
                         fontSize: '0.875rem',
                         background: 'none',
@@ -358,7 +359,7 @@ export default function PatientsPage() {
             paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
           }}>
             <div style={{
-              backgroundColor: '#111827',
+              backgroundColor: colors.primary.navy,
               borderRadius: '1rem',
               padding: isMobile ? '2rem' : '3rem',
               color: '#ffffff',
@@ -580,7 +581,7 @@ export default function PatientsPage() {
 
         {/* CTA Section */}
         <section style={{
-          backgroundColor: '#111827',
+          backgroundColor: colors.primary.navy,
           color: '#ffffff',
           paddingTop: isMobile ? '3rem' : '4rem',
           paddingBottom: isMobile ? '3rem' : '4rem'

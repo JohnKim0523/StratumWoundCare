@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import PageTransition from '@/components/PageTransition';
 import Icon from '@/components/Icon';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
+import { colors } from '@/lib/colors';
 
 export default function Home() {
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -161,8 +162,8 @@ export default function Home() {
                   onClick={() => setActiveTab('about')}
                   className="font-bold cursor-pointer transition-all duration-300"
                   style={{
-                    color: activeTab === 'about' ? '#111827' : '#9ca3af',
-                    borderBottom: activeTab === 'about' ? '4px solid #000000' : 'none',
+                    color: activeTab === 'about' ? colors.primary.navy : colors.neutral.lightGray,
+                    borderBottom: activeTab === 'about' ? `4px solid ${colors.primary.blue}` : 'none',
                     paddingBottom: '0.5rem',
                     display: 'inline-block',
                     fontSize: isMobile
@@ -172,13 +173,13 @@ export default function Home() {
                   }}
                   onMouseEnter={(e) => {
                     if (activeTab !== 'about') {
-                      e.currentTarget.style.color = '#6b7280';
+                      e.currentTarget.style.color = colors.neutral.mediumGray;
                       e.currentTarget.style.transform = 'scale(1.02)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (activeTab !== 'about') {
-                      e.currentTarget.style.color = '#9ca3af';
+                      e.currentTarget.style.color = colors.neutral.lightGray;
                       e.currentTarget.style.transform = 'scale(1)';
                     }
                   }}
@@ -189,8 +190,8 @@ export default function Home() {
                   onClick={() => setActiveTab('commitment')}
                   className="font-bold cursor-pointer transition-all duration-300"
                   style={{
-                    color: activeTab === 'commitment' ? '#111827' : '#9ca3af',
-                    borderBottom: activeTab === 'commitment' ? '4px solid #000000' : 'none',
+                    color: activeTab === 'commitment' ? colors.primary.navy : colors.neutral.lightGray,
+                    borderBottom: activeTab === 'commitment' ? `4px solid ${colors.primary.blue}` : 'none',
                     paddingBottom: '0.5rem',
                     display: 'inline-block',
                     fontSize: isMobile
@@ -200,13 +201,13 @@ export default function Home() {
                   }}
                   onMouseEnter={(e) => {
                     if (activeTab !== 'commitment') {
-                      e.currentTarget.style.color = '#6b7280';
+                      e.currentTarget.style.color = colors.neutral.mediumGray;
                       e.currentTarget.style.transform = 'scale(1.02)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (activeTab !== 'commitment') {
-                      e.currentTarget.style.color = '#9ca3af';
+                      e.currentTarget.style.color = colors.neutral.lightGray;
                       e.currentTarget.style.transform = 'scale(1)';
                     }
                   }}
@@ -253,18 +254,18 @@ export default function Home() {
                     href="/about"
                     className="inline-block font-semibold transition-all duration-300"
                     style={{
-                      color: '#111827',
+                      color: colors.primary.blue,
                       fontSize: '1.125rem',
-                      borderBottom: '2px solid #111827',
+                      borderBottom: `2px solid ${colors.primary.blue}`,
                       paddingBottom: '4px'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#4b5563';
-                      e.currentTarget.style.borderBottomColor = '#4b5563';
+                      e.currentTarget.style.color = colors.secondary.darkBlue;
+                      e.currentTarget.style.borderBottomColor = colors.secondary.darkBlue;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = '#111827';
-                      e.currentTarget.style.borderBottomColor = '#111827';
+                      e.currentTarget.style.color = colors.primary.blue;
+                      e.currentTarget.style.borderBottomColor = colors.primary.blue;
                     }}
                   >
                     Learn More About Us →
@@ -363,7 +364,7 @@ export default function Home() {
                 />
               </div>
               <div style={{
-                backgroundColor: '#111827',
+                backgroundColor: colors.primary.navy,
                 padding: '0.875rem 1.25rem',
                 borderRadius: '0.5rem',
                 display: 'flex',
@@ -450,10 +451,11 @@ export default function Home() {
         >
           <div
             style={{
-              backgroundColor: '#000000',
+              background: colors.gradients.darkBlue,
               borderRadius: isMobile ? '16px' : '24px',
               padding: isMobile ? '2rem' : isTablet ? '3rem' : '4rem',
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)'
+              boxShadow: `0 8px 30px rgba(8, 145, 220, 0.2)`,
+              border: `1px solid ${colors.primary.blue}20`
             }}
           >
             {/* Main Heading */}
@@ -516,32 +518,33 @@ export default function Home() {
                   <div
                     key={index}
                     style={{
-                      backgroundColor: '#1a1a1a',
+                      backgroundColor: colors.primary.navy,
                       padding: service.hasImage ? 0 : (isMobile ? '1.25rem' : '1.75rem'),
                       borderRadius: '12px',
                       transition: 'all 0.3s',
-                      borderLeft: service.hasImage ? 'none' : `4px solid ${service.color}`,
+                      borderLeft: service.hasImage ? 'none' : `4px solid ${colors.primary.green}`,
                       position: 'relative',
                       display: 'flex',
                       flexDirection: 'column',
                       height: '100%',
-                      overflow: 'hidden'
+                      overflow: 'hidden',
+                      border: `1px solid ${colors.primary.blue}40`
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#2d2d2d';
+                      e.currentTarget.style.backgroundColor = colors.secondary.darkBlue;
                       e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow = '0 8px 20px rgba(255, 255, 255, 0.1)';
+                      e.currentTarget.style.boxShadow = `0 8px 20px rgba(8, 145, 220, 0.3)`;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#1a1a1a';
+                      e.currentTarget.style.backgroundColor = colors.primary.navy;
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
                     {service.hasImage ? (
                       <>
-                        <div style={{ width: '100%', height: '160px', backgroundColor: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2">
+                        <div style={{ width: '100%', height: '160px', backgroundColor: colors.neutral.darkGray, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke={colors.primary.blue} strokeWidth="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <circle cx="8.5" cy="8.5" r="1.5"></circle>
                             <polyline points="21 15 16 10 5 21"></polyline>
@@ -572,7 +575,7 @@ export default function Home() {
                     ) : (
                       <>
                         <div style={{ marginBottom: '1rem' }}>
-                          <Icon type={service.icon} size={isMobile ? 40 : 48} color="#9ca3af" />
+                          <Icon type={service.icon} size={isMobile ? 40 : 48} color={colors.primary.green} />
                         </div>
                         <h3
                           className="font-bold"
@@ -1225,7 +1228,7 @@ export default function Home() {
         style={{
           paddingTop: isMobile ? '4rem' : '6rem',
           paddingBottom: isMobile ? '4rem' : '6rem',
-          backgroundColor: '#000000'
+          background: colors.gradients.darkBlue
         }}
       >
         <div
@@ -1280,15 +1283,19 @@ export default function Home() {
                     width: '100%',
                     padding: '1rem 1.25rem',
                     backgroundColor: 'transparent',
-                    border: '1px solid #4b5563',
+                    border: '1px solid #ffffff',
                     borderRadius: '4px',
                     color: '#ffffff',
                     fontSize: '1rem',
                     outline: 'none',
                     transition: 'border-color 0.3s'
                   }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#9ca3af'}
-                  onBlur={(e) => e.currentTarget.style.borderColor = '#4b5563'}
+                  onFocus={(e) => {
+                    e.currentTarget.style.border = `1px solid ${colors.primary.blue}`;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.border = '1px solid #ffffff';
+                  }}
                 />
 
                 <input
@@ -1299,15 +1306,19 @@ export default function Home() {
                     width: '100%',
                     padding: '1rem 1.25rem',
                     backgroundColor: 'transparent',
-                    border: '1px solid #4b5563',
+                    border: '1px solid #ffffff',
                     borderRadius: '4px',
                     color: '#ffffff',
                     fontSize: '1rem',
                     outline: 'none',
                     transition: 'border-color 0.3s'
                   }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#9ca3af'}
-                  onBlur={(e) => e.currentTarget.style.borderColor = '#4b5563'}
+                  onFocus={(e) => {
+                    e.currentTarget.style.border = `1px solid ${colors.primary.blue}`;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.border = '1px solid #ffffff';
+                  }}
                 />
 
                 <textarea
@@ -1317,7 +1328,7 @@ export default function Home() {
                     width: '100%',
                     padding: '1rem 1.25rem',
                     backgroundColor: 'transparent',
-                    border: '1px solid #4b5563',
+                    border: '1px solid #ffffff',
                     borderRadius: '4px',
                     color: '#ffffff',
                     fontSize: '1rem',
@@ -1326,31 +1337,35 @@ export default function Home() {
                     resize: 'vertical',
                     fontFamily: 'inherit'
                   }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#9ca3af'}
-                  onBlur={(e) => e.currentTarget.style.borderColor = '#4b5563'}
+                  onFocus={(e) => {
+                    e.currentTarget.style.border = `1px solid ${colors.primary.blue}`;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.border = '1px solid #ffffff';
+                  }}
                 />
 
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: '#f8bbd0',
-                    color: '#000000',
+                    background: colors.gradients.blueGreen,
+                    color: '#ffffff',
                     padding: isMobile ? '0.875rem 2rem' : '1rem 2.5rem',
                     borderRadius: '4px',
                     fontWeight: 'bold',
                     fontSize: '1rem',
-                    border: 'none',
+                    border: `2px solid ${colors.primary.blue}`,
                     cursor: 'pointer',
                     transition: 'all 0.3s',
                     alignSelf: 'center',
                     width: isMobile ? '100%' : 'auto'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#ffffff';
+                    e.currentTarget.style.background = colors.secondary.lightBlue;
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#f8bbd0';
+                    e.currentTarget.style.background = colors.gradients.blueGreen;
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -1370,7 +1385,7 @@ export default function Home() {
               {/* Phone */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <Icon type="phone" size={24} color="#f8bbd0" />
+                  <Icon type="phone" size={24} color={colors.primary.green} />
                   <h4 style={{
                     fontSize: '1.125rem',
                     fontWeight: '600',
@@ -1395,7 +1410,7 @@ export default function Home() {
               {/* Email */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <Icon type="mail" size={24} color="#f8bbd0" />
+                  <Icon type="mail" size={24} color={colors.primary.green} />
                   <h4 style={{
                     fontSize: '1.125rem',
                     fontWeight: '600',
@@ -1418,7 +1433,7 @@ export default function Home() {
               {/* Location */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <Icon type="mapPin" size={24} color="#f8bbd0" />
+                  <Icon type="mapPin" size={24} color={colors.primary.green} />
                   <h4 style={{
                     fontSize: '1.125rem',
                     fontWeight: '600',
@@ -1445,13 +1460,13 @@ export default function Home() {
                     display: 'inline-block',
                     marginLeft: '2.5rem',
                     marginTop: '0.5rem',
-                    color: '#f8bbd0',
+                    color: colors.primary.green,
                     fontSize: '0.875rem',
                     textDecoration: 'underline',
                     transition: 'color 0.3s'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = '#f8bbd0'}
+                  onMouseEnter={(e) => e.currentTarget.style.color = colors.secondary.lightGreen}
+                  onMouseLeave={(e) => e.currentTarget.style.color = colors.primary.green}
                 >
                   Get Directions →
                 </Link>
@@ -1460,7 +1475,7 @@ export default function Home() {
               {/* Office Hours */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <Icon type="clock" size={24} color="#f8bbd0" />
+                  <Icon type="clock" size={24} color={colors.primary.green} />
                   <h4 style={{
                     fontSize: '1.125rem',
                     fontWeight: '600',
@@ -1559,7 +1574,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="calendar" size={40} color="#6b7280" />
+                <Icon type="calendar" size={40} color={colors.primary.blue} />
               </div>
               <h3
                 style={{
@@ -1593,7 +1608,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="heart" size={40} color="#6b7280" />
+                <Icon type="heart" size={40} color={colors.primary.green} />
               </div>
               <h3
                 style={{
@@ -1627,7 +1642,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="graduationCap" size={40} color="#6b7280" />
+                <Icon type="graduationCap" size={40} color={colors.primary.blue} />
               </div>
               <h3
                 style={{
@@ -1661,7 +1676,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="hospital" size={40} color="#6b7280" />
+                <Icon type="hospital" size={40} color={colors.primary.green} />
               </div>
               <h3
                 style={{
@@ -1695,7 +1710,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="dollarSign" size={40} color="#6b7280" />
+                <Icon type="dollarSign" size={40} color={colors.primary.green} />
               </div>
               <h3
                 style={{
@@ -1729,7 +1744,7 @@ export default function Home() {
               }}
             >
               <div style={{ marginBottom: '1rem' }}>
-                <Icon type="clipboard" size={40} color="#6b7280" />
+                <Icon type="clipboard" size={40} color={colors.primary.blue} />
               </div>
               <h3
                 style={{
@@ -1787,15 +1802,17 @@ export default function Home() {
             <Link
               href="/careers"
               style={{
-                backgroundColor: '#f8bbd0',
-                color: '#000000',
+                background: colors.gradients.blueGreen,
+                color: '#ffffff',
                 padding: isMobile ? '0.875rem 2rem' : '1rem 2.5rem',
                 borderRadius: '8px',
                 fontWeight: 'bold',
                 fontSize: isMobile ? '1rem' : '1.125rem',
                 textDecoration: 'none',
                 display: 'inline-block',
-                transition: 'all 0.3s'
+                transition: 'all 0.3s',
+                border: `2px solid ${colors.primary.blue}`,
+                boxShadow: `0 4px 12px rgba(8, 145, 220, 0.3)`
               }}
             >
               View Career Opportunities

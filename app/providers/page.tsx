@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import PageTransition from '@/components/PageTransition';
 import Icon from '@/components/Icon';
+import { colors } from '@/lib/colors';
 
 export default function ProvidersPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -24,7 +25,7 @@ export default function ProvidersPage() {
       <div style={{ paddingTop: '130px' }}>
         {/* Header Section */}
         <section style={{
-          backgroundColor: '#111827',
+          backgroundColor: colors.primary.navy,
           color: '#ffffff',
           paddingTop: isMobile ? '3rem' : '4rem',
           paddingBottom: isMobile ? '3rem' : '4rem'
@@ -178,7 +179,7 @@ export default function ProvidersPage() {
               <a
                 href="tel:5551234567"
                 style={{
-                  backgroundColor: '#111827',
+                  backgroundColor: colors.primary.navy,
                   color: '#ffffff',
                   padding: '0.75rem 2rem',
                   borderRadius: '0.5rem',

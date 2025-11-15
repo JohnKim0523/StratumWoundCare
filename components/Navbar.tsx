@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { colors } from '@/lib/colors';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +45,7 @@ export default function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 w-full shadow-lg transition-all duration-500 ease-in-out"
       style={{
-        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.3)',
+        backgroundColor: isScrolled ? 'rgba(15, 23, 42, 1)' : 'rgba(15, 23, 42, 0.3)',
         padding: isMobile
           ? (isScrolled ? '0.75rem 0' : '1rem 0')
           : (isScrolled ? '0.875rem 0' : '1.75rem 0')
@@ -56,27 +59,34 @@ export default function Navbar() {
           {/* Left: Desktop Navigation Links */}
           {!isMobile && (
             <div className="flex items-center" style={{ gap: '2.5rem', flex: 1 }}>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-medium transition-all duration-300 whitespace-nowrap hover:-translate-y-1"
-                  style={{
-                    color: '#ffffff',
-                    paddingBottom: '4px',
-                    borderBottom: '2px solid transparent',
-                    fontSize: isScrolled ? '0.875rem' : '1rem'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderBottom = '2px solid #fbbf24';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderBottom = '2px solid transparent';
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="font-medium transition-all duration-300 whitespace-nowrap hover:-translate-y-1"
+                    style={{
+                      color: '#ffffff',
+                      paddingBottom: '4px',
+                      borderBottom: isActive ? `2px solid ${colors.primary.blue}` : '2px solid transparent',
+                      fontSize: isScrolled ? '0.875rem' : '1rem'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.borderBottom = `2px solid ${colors.primary.blue}`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.borderBottom = '2px solid transparent';
+                      }
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           )}
 
@@ -124,11 +134,11 @@ export default function Navbar() {
               href="/contact"
               className="font-bold transition-all duration-300 whitespace-nowrap hover:scale-105"
               style={{
-                backgroundColor: '#f8bbd0',
-                color: '#000000',
+                background: colors.gradients.blueGreen,
+                color: '#ffffff',
                 borderRadius: '8px',
-                border: '2px solid #f8bbd0',
-                boxShadow: '0 2px 8px rgba(248, 187, 208, 0.3)',
+                border: `2px solid ${colors.primary.blue}`,
+                boxShadow: `0 2px 8px rgba(8, 145, 220, 0.3)`,
                 padding: isMobile
                   ? '0.6rem 1rem'
                   : (isScrolled ? '0.8rem 1.85rem' : '1.35rem 3.2rem'),

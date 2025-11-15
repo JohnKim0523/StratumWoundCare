@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import Icon from './Icon';
+import { colors } from '@/lib/colors';
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#0f172a', color: '#ffffff' }}>
+    <footer style={{ backgroundColor: colors.primary.navy, color: '#ffffff' }}>
       <div style={{
         maxWidth: '1400px',
         marginLeft: 'auto',
@@ -84,7 +85,7 @@ export default function Footer() {
                       textDecoration: 'none',
                       transition: 'color 0.3s'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#f8bbd0'}
+                    onMouseEnter={(e) => e.currentTarget.style.color = colors.primary.blue}
                     onMouseLeave={(e) => e.currentTarget.style.color = '#cbd5e1'}
                   >
                     {link.name}
@@ -138,12 +139,12 @@ export default function Footer() {
                 </a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Icon type="emergency" size={18} color="#f8bbd0" />
+                <Icon type="emergency" size={18} color={colors.primary.green} />
                 <a
                   href="tel:555-123-9999"
                   style={{
                     fontSize: '0.875rem',
-                    color: '#f8bbd0',
+                    color: colors.primary.green,
                     textDecoration: 'none',
                     fontWeight: '600'
                   }}
@@ -180,21 +181,22 @@ export default function Footer() {
                 href="/contact"
                 style={{
                   display: 'inline-block',
-                  backgroundColor: '#f8bbd0',
-                  color: '#000000',
+                  background: colors.gradients.blueGreen,
+                  color: '#ffffff',
                   padding: '0.75rem 1.5rem',
                   borderRadius: '8px',
                   fontSize: '0.875rem',
                   fontWeight: 'bold',
                   textDecoration: 'none',
-                  transition: 'all 0.3s'
+                  transition: 'all 0.3s',
+                  border: `2px solid ${colors.primary.blue}`
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.background = colors.secondary.lightBlue;
                   e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f8bbd0';
+                  e.currentTarget.style.background = colors.gradients.blueGreen;
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >

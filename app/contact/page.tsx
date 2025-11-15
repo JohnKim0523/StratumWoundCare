@@ -5,6 +5,7 @@ import PageTransition from '@/components/PageTransition';
 import Icon from '@/components/Icon';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
 import Link from 'next/link';
+import { colors } from '@/lib/colors';
 
 export default function ContactPage() {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -78,7 +79,7 @@ export default function ContactPage() {
     <div style={{ paddingTop: '130px' }}>
       {/* Hero Header Section */}
       <section style={{
-        backgroundColor: '#111827',
+        backgroundColor: colors.primary.navy,
         paddingTop: isMobile ? '3rem' : '4rem',
         paddingBottom: isMobile ? '3rem' : '4rem'
       }}>
@@ -566,28 +567,29 @@ export default function ContactPage() {
                   type="submit"
                   disabled={isSubmitting}
                   style={{
-                    backgroundColor: '#f8bbd0',
-                    color: '#000000',
+                    background: colors.gradients.blueGreen,
+                    color: '#ffffff',
                     padding: '1rem 2rem',
                     borderRadius: '8px',
                     fontWeight: 'bold',
                     fontSize: '1rem',
-                    border: 'none',
+                    border: `2px solid ${colors.primary.blue}`,
                     cursor: isSubmitting ? 'not-allowed' : 'pointer',
                     transition: 'all 0.3s',
-                    opacity: isSubmitting ? 0.7 : 1
+                    opacity: isSubmitting ? 0.7 : 1,
+                    boxShadow: `0 4px 12px rgba(8, 145, 220, 0.3)`
                   }}
                   onMouseEnter={(e) => {
                     if (!isSubmitting) {
-                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.background = colors.secondary.lightBlue;
                       e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(8, 145, 220, 0.4)';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#f8bbd0';
+                    e.currentTarget.style.background = colors.gradients.blueGreen;
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(8, 145, 220, 0.3)';
                   }}
                 >
                   {isSubmitting ? 'Sending...' : 'Submit Request'}
@@ -624,7 +626,7 @@ export default function ContactPage() {
 
             {/* Right: Additional Information */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '2rem' : '3rem' }}>
-              {/* Map Placeholder */}
+              {/* Interactive Map */}
               <div>
                 <h3 style={{
                   fontSize: isMobile ? '1.5rem' : '2rem',
@@ -634,11 +636,43 @@ export default function ContactPage() {
                 }}>
                   Visit Our Clinic
                 </h3>
-                <ImagePlaceholder
-                  height={isMobile ? '250px' : '300px'}
-                  text="Interactive Map"
-                  subtext="Click to view directions to our facility"
-                />
+                <div style={{
+                  width: '100%',
+                  height: isMobile ? '250px' : '300px',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+                }}>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.5!2d-75.2063!3d40.8653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c43e5d5c5d5d5d%3A0x5d5d5d5d5d5d5d5d!2s55R%20Broadway%2C%20Bangor%2C%20PA%2018013!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Stratum Wound Care Location"
+                  />
+                </div>
+                <p style={{
+                  marginTop: '1rem',
+                  fontSize: '0.875rem',
+                  color: '#6b7280',
+                  textAlign: 'center'
+                }}>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: colors.primary.blue,
+                      textDecoration: 'underline',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Open in Google Maps →
+                  </a>
+                </p>
               </div>
 
               {/* Telehealth Section */}
@@ -671,7 +705,7 @@ export default function ContactPage() {
                   href="/contact"
                   style={{
                     display: 'inline-block',
-                    backgroundColor: '#111827',
+                    backgroundColor: colors.primary.navy,
                     color: '#ffffff',
                     padding: '0.875rem 1.5rem',
                     borderRadius: '8px',
