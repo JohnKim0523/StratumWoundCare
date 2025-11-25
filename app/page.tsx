@@ -129,8 +129,8 @@ export default function Home() {
       <section
         style={{
           backgroundColor: '#f9fafb',
-          paddingTop: isMobile ? '3rem' : '5rem',
-          paddingBottom: isMobile ? '3rem' : '5rem'
+          paddingTop: isMobile ? '2rem' : '3rem',
+          paddingBottom: isMobile ? '0.5rem' : '1rem'
         }}
       >
         <div
@@ -142,13 +142,8 @@ export default function Home() {
             marginRight: 'auto'
           }}
         >
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr' : '1.4fr 0.6fr',
-            gap: isMobile ? '2rem' : isTablet ? '2.5rem' : '3.5rem',
-            alignItems: 'start'
-          }}>
-            {/* Left Column */}
+          <div>
+            {/* Content */}
             <div>
               {/* Tab Headers */}
               <div style={{
@@ -319,124 +314,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column - Location image stays the same always */}
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                backgroundColor: '#e5e7eb',
-                padding: isMobile ? '0.875rem' : '1.125rem',
-                borderRadius: '1rem',
-                textAlign: 'center',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.08)',
-                border: '1px solid #d1d5db',
-                display: 'block',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                maxWidth: isMobile || isTablet ? '380px' : 'none',
-                margin: isMobile || isTablet ? '0 auto' : '0'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.12)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.08)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <div style={{
-                display: 'inline-block',
-                marginBottom: '0.65rem',
-                borderRadius: '0.5rem',
-                overflow: 'hidden',
-                border: '3px solid #ffffff',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.08)'
-              }}>
-                <Image
-                  src="/location.png"
-                  alt="Office Location"
-                  width={isMobile ? 190 : isTablet ? 210 : 228}
-                  height={isMobile ? 253 : isTablet ? 280 : 304}
-                  style={{ display: 'block' }}
-                />
-              </div>
-              <div style={{
-                backgroundColor: colors.primary.navy,
-                padding: '0.875rem 1.25rem',
-                borderRadius: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem'
-              }}>
-                <div>
-                  <p style={{
-                    fontSize: '1.125rem',
-                    fontWeight: '600',
-                    color: '#ffffff',
-                    marginBottom: '0.25rem',
-                    letterSpacing: '0.5px'
-                  }}>55R Broadway</p>
-                  <p style={{
-                    fontSize: '1.125rem',
-                    fontWeight: '600',
-                    color: '#ffffff',
-                    letterSpacing: '0.5px'
-                  }}>Bangor, PA 18013</p>
-                </div>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{ flexShrink: 0, marginLeft: '0.25rem' }}
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-            </a>
           </div>
-        </div>
-      </section>
-
-      {/* Featured Image Section - Facility / Team */}
-      <section
-        style={{
-          paddingTop: isMobile ? '3rem' : '4rem',
-          paddingBottom: isMobile ? '3rem' : '4rem',
-          backgroundColor: '#f9fafb'
-        }}
-      >
-        <div
-          style={{
-            paddingLeft: isMobile ? '1.5rem' : isTablet ? '3rem' : '4rem',
-            paddingRight: isMobile ? '1.5rem' : isTablet ? '3rem' : '4rem',
-            maxWidth: '1400px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}
-        >
-          <ImagePlaceholder
-            height={isMobile ? '300px' : isTablet ? '400px' : '500px'}
-            text="Our Modern Wound Care Facility"
-            subtext="Professional healthcare environment with state-of-the-art equipment"
-          />
         </div>
       </section>
 
       {/* Services Section */}
       <section
         style={{
-          paddingTop: isMobile ? '3rem' : '5rem',
-          paddingBottom: isMobile ? '3rem' : '5rem',
+          paddingTop: isMobile ? '1.5rem' : '2rem',
+          paddingBottom: isMobile ? '0.5rem' : '1rem',
           backgroundColor: '#ffffff'
         }}
       >
@@ -499,30 +385,25 @@ export default function Home() {
                   gridTemplateColumns: isMobile
                     ? '1fr'
                     : isTablet
-                    ? 'repeat(2, 1fr)'
-                    : 'repeat(3, 1fr)',
-                  gap: isMobile ? '1rem' : '1.5rem'
+                    ? '1fr'
+                    : 'repeat(2, 1fr)',
+                  gap: isMobile ? '1.5rem' : '2rem'
                 }}
               >
                 {[
-                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", icon: "shield", color: '#374151', hasImage: true, imagePlaceholder: "Diabetic Foot Care" },
-                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", icon: "hospital", color: '#374151', hasImage: true, imagePlaceholder: "Pressure Wound Treatment" },
-                  { title: "Wound Infections", description: "Expert treatment of infected wounds and complications", icon: "alert", color: '#374151', hasImage: true, imagePlaceholder: "Infection Control" },
-                  { title: "Chronic Soft Tissue Infections", description: "Long-term management of soft tissue infections", icon: "clipboard", color: '#374151', hasImage: true, imagePlaceholder: "Soft Tissue Care" },
-                  { title: "Chronic Bone Infections", description: "Specialized care for osteomyelitis and bone infections", icon: "shield", color: '#374151', hasImage: true, imagePlaceholder: "Bone Infection Treatment" },
-                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", icon: "heart", color: '#374151', hasImage: true, imagePlaceholder: "Venous Ulcer Care" },
-                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", icon: "heart", color: '#374151', hasImage: true, imagePlaceholder: "Arterial Wound Care" },
-                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", icon: "clipboard", color: '#374151', hasImage: true, imagePlaceholder: "Surgical Wound Care" },
-                  { title: "Atypical Wounds", description: "Diagnosis and treatment of unusual wound types", icon: "checkCircle", color: '#374151', hasImage: true, imagePlaceholder: "Specialized Treatment" }
+                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", icon: "shield", color: '#374151', hasImage: false },
+                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", icon: "hospital", color: '#374151', hasImage: false },
+                  { title: "Wound Infections/ Osteomyelitis (Bone Infection) / Cellulitis", description: "Expert treatment of infected wounds and complications", icon: "alert", color: '#374151', hasImage: true, imageSrc: "/Osteomylitis.png" },
+                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", icon: "heart", color: '#374151', hasImage: true, imageSrc: "/Venous_Leg_Ulcers.png" },
+                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", icon: "heart", color: '#374151', hasImage: false },
+                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", icon: "clipboard", color: '#374151', hasImage: false }
                 ].map((service, index) => (
                   <div
                     key={index}
                     style={{
                       backgroundColor: colors.primary.navy,
-                      padding: service.hasImage ? 0 : (isMobile ? '1.25rem' : '1.75rem'),
                       borderRadius: '12px',
                       transition: 'all 0.3s',
-                      borderLeft: service.hasImage ? 'none' : `4px solid ${colors.primary.green}`,
                       position: 'relative',
                       display: 'flex',
                       flexDirection: 'column',
@@ -531,39 +412,53 @@ export default function Home() {
                       border: `1px solid ${colors.primary.blue}40`
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.secondary.darkBlue;
                       e.currentTarget.style.transform = 'translateY(-4px)';
                       e.currentTarget.style.boxShadow = `0 8px 20px rgba(8, 145, 220, 0.3)`;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.primary.navy;
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
                     {service.hasImage ? (
-                      <>
-                        <div style={{ width: '100%', height: '160px', backgroundColor: colors.neutral.darkGray, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke={colors.primary.blue} strokeWidth="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                          </svg>
+                      <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '45% 1fr',
+                        gap: 0,
+                        height: '100%',
+                        minHeight: isMobile ? 'auto' : '320px'
+                      }}>
+                        <div style={{
+                          width: '100%',
+                          height: isMobile ? '220px' : '100%',
+                          position: 'relative',
+                          backgroundColor: '#f8f9fa',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: '1rem'
+                        }}>
+                          <Image
+                            src={service.imageSrc || ''}
+                            alt={service.title}
+                            fill
+                            style={{ objectFit: 'contain', padding: '1rem' }}
+                          />
                         </div>
-                        <div style={{ padding: isMobile ? '1.25rem' : '1.5rem' }}>
+                        <div style={{ padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                           <h3
                             className="font-bold"
                             style={{
                               color: '#ffffff',
                               marginBottom: '0.75rem',
-                              fontSize: isMobile ? '1.125rem' : '1.25rem'
+                              fontSize: isMobile ? '1.125rem' : '1.375rem'
                             }}
                           >
                             {service.title}
                           </h3>
                           <p
                             style={{
-                              color: '#d1d1d1',
+                              color: '#d1d5db',
                               fontSize: isMobile ? '0.875rem' : '1rem',
                               lineHeight: '1.6'
                             }}
@@ -571,32 +466,55 @@ export default function Home() {
                             {service.description}
                           </p>
                         </div>
-                      </>
+                      </div>
                     ) : (
-                      <>
-                        <div style={{ marginBottom: '1rem' }}>
-                          <Icon type={service.icon} size={isMobile ? 40 : 48} color={colors.primary.green} />
+                      <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '45% 1fr',
+                        gap: 0,
+                        height: '100%',
+                        minHeight: isMobile ? 'auto' : '320px'
+                      }}>
+                        <div style={{
+                          width: '100%',
+                          height: isMobile ? '220px' : '100%',
+                          backgroundColor: '#f8f9fa',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          border: '2px dashed #d1d5db'
+                        }}>
+                          <div style={{ textAlign: 'center', padding: '2rem' }}>
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" style={{ margin: '0 auto 1rem' }}>
+                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                              <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <p style={{ color: '#9ca3af', fontSize: '0.875rem', fontWeight: '500' }}>Image Coming Soon</p>
+                          </div>
                         </div>
-                        <h3
-                          className="font-bold"
-                          style={{
-                            color: '#ffffff',
-                            marginBottom: '0.75rem',
-                            fontSize: isMobile ? '1.125rem' : '1.25rem'
-                          }}
-                        >
-                          {service.title}
-                        </h3>
-                        <p
-                          style={{
-                            color: '#d1d1d1',
-                            fontSize: isMobile ? '0.875rem' : '1rem',
-                            lineHeight: '1.6'
-                          }}
-                        >
-                          {service.description}
-                        </p>
-                      </>
+                        <div style={{ padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <h3
+                            className="font-bold"
+                            style={{
+                              color: '#ffffff',
+                              marginBottom: '0.75rem',
+                              fontSize: isMobile ? '1.125rem' : '1.375rem'
+                            }}
+                          >
+                            {service.title}
+                          </h3>
+                          <p
+                            style={{
+                              color: '#d1d5db',
+                              fontSize: isMobile ? '0.875rem' : '1rem',
+                              lineHeight: '1.6'
+                            }}
+                          >
+                            {service.description}
+                          </p>
+                        </div>
+                      </div>
                     )}
                   </div>
                 ))}
@@ -718,7 +636,7 @@ export default function Home() {
       {/* Patient Information Section */}
       <section
         style={{
-          paddingTop: isMobile ? '3rem' : '5rem',
+          paddingTop: isMobile ? '1rem' : '1.5rem',
           paddingBottom: isMobile ? '3rem' : '5rem',
           backgroundColor: '#f9fafb'
         }}

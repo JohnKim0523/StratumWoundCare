@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import PageTransition from '@/components/PageTransition';
 import { useState, useEffect } from 'react';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
@@ -90,84 +91,118 @@ export default function ServicesPage() {
           {/* Wound Types Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-            gap: isMobile ? '1.5rem' : '2rem',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr',
+            gap: isMobile ? '2rem' : '2.5rem',
             marginBottom: isMobile ? '3rem' : '4rem'
           }}>
             {[
               {
                 title: "Diabetic Foot Ulcers",
-                description: "Comprehensive care for diabetic foot complications including neuropathic and ischemic ulcers. Our specialized approach focuses on preventing amputations and promoting healing."
+                description: "Comprehensive care for diabetic foot complications including neuropathic and ischemic ulcers. Our specialized approach focuses on preventing amputations and promoting healing.",
+                hasImage: false
               },
               {
                 title: "Pressure Injuries",
-                description: "Expert treatment of pressure ulcers (bedsores) at all stages. We provide advanced wound care protocols to heal existing wounds and prevent recurrence."
+                description: "Expert treatment of pressure ulcers (bedsores) at all stages. We provide advanced wound care protocols to heal existing wounds and prevent recurrence.",
+                hasImage: false
               },
               {
-                title: "Wound Infections",
-                description: "Aggressive management of infected wounds with targeted antibiotic therapy, debridement, and advanced wound care techniques."
-              },
-              {
-                title: "Chronic Soft Tissue Infections",
-                description: "Long-term management and treatment of persistent soft tissue infections that require specialized care and monitoring."
-              },
-              {
-                title: "Chronic Bone Infections",
-                description: "Expert care for osteomyelitis and chronic bone infections requiring multi-disciplinary treatment approaches."
+                title: "Wound Infections/Osteomyelitis(Bone Infection)/Cellulitis",
+                description: "Aggressive management of infected wounds with targeted antibiotic therapy, debridement, and advanced wound care techniques.",
+                hasImage: true,
+                imageSrc: "/Osteomylitis.png"
               },
               {
                 title: "Venous Leg Ulcers",
-                description: "Specialized treatment for ulcers caused by venous insufficiency, including compression therapy and advanced wound care."
+                description: "Specialized treatment for ulcers caused by venous insufficiency, including compression therapy and advanced wound care.",
+                hasImage: true,
+                imageSrc: "/Venous_Leg_Ulcers.png"
               },
               {
                 title: "Arterial Ulcers",
-                description: "Management of wounds caused by arterial insufficiency with focus on improving circulation and promoting healing."
+                description: "Management of wounds caused by arterial insufficiency with focus on improving circulation and promoting healing.",
+                hasImage: false
               },
               {
                 title: "Surgical Wounds",
-                description: "Post-operative wound care including management of dehiscence, infection, and delayed healing."
-              },
-              {
-                title: "Atypical Wounds",
-                description: "Diagnosis and treatment of unusual or complex wound types that require specialized expertise and care."
+                description: "Post-operative wound care including management of dehiscence, infection, and delayed healing.",
+                hasImage: false
               }
             ].map((wound, index) => (
               <div
                 key={index}
                 style={{
-                  backgroundColor: '#f9fafb',
+                  backgroundColor: '#ffffff',
                   borderRadius: '12px',
-                  padding: isMobile ? '1.5rem' : '2rem',
+                  overflow: 'hidden',
                   border: '1px solid #e5e7eb',
                   transition: 'all 0.3s',
-                  cursor: 'default'
+                  cursor: 'default',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                  display: wound.hasImage ? 'grid' : 'block',
+                  gridTemplateColumns: wound.hasImage && !isMobile ? '45% 1fr' : '1fr',
+                  minHeight: wound.hasImage && !isMobile ? '320px' : 'auto'
                 }}
               >
-                <h3 style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}>
-                  {wound.title}
-                </h3>
-                <p style={{
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  color: '#374151',
-                  lineHeight: '1.6'
-                }}>
-                  {wound.description}
-                </p>
+                {wound.hasImage ? (
+                  <>
+                    <div style={{
+                      width: '100%',
+                      height: isMobile ? '280px' : '100%',
+                      position: 'relative',
+                      backgroundColor: '#f8f9fa',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: isMobile ? '1.5rem' : '2rem'
+                    }}>
+                      <Image
+                        src={wound.imageSrc || ''}
+                        alt={wound.title}
+                        fill
+                        style={{ objectFit: 'contain', padding: isMobile ? '1.5rem' : '2rem' }}
+                      />
+                    </div>
+                    <div style={{ padding: isMobile ? '1.5rem' : '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <h3 style={{
+                        fontSize: isMobile ? '1.25rem' : '1.75rem',
+                        fontWeight: 'bold',
+                        color: '#111827',
+                        marginBottom: '1rem'
+                      }}>
+                        {wound.title}
+                      </h3>
+                      <p style={{
+                        fontSize: isMobile ? '0.875rem' : '1.125rem',
+                        color: '#4b5563',
+                        lineHeight: '1.7'
+                      }}>
+                        {wound.description}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ padding: isMobile ? '1.5rem' : '2rem' }}>
+                    <h3 style={{
+                      fontSize: isMobile ? '1.25rem' : '1.5rem',
+                      fontWeight: 'bold',
+                      color: '#111827',
+                      marginBottom: '1rem'
+                    }}>
+                      {wound.title}
+                    </h3>
+                    <p style={{
+                      fontSize: isMobile ? '0.875rem' : '1rem',
+                      color: '#374151',
+                      lineHeight: '1.6'
+                    }}>
+                      {wound.description}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-
-          {/* Image Placeholder - Wound Care Facility */}
-          <ImagePlaceholder
-            height={isMobile ? '250px' : '350px'}
-            text="Advanced Wound Care Treatment Room"
-            subtext="Modern equipment and sterile environment for optimal healing"
-          />
         </div>
       </section>
 
@@ -215,22 +250,22 @@ export default function ServicesPage() {
               {
                 title: "Negative Pressure Therapy (Wound VAC)",
                 description: "Advanced vacuum-assisted closure technology that promotes wound healing through controlled negative pressure. Reduces healing time and enhances granulation tissue formation.",
-                imagePlaceholder: "[Wound VAC Device Photo]"
+                imageSrc: "/Wound_VAC.png"
               },
               {
                 title: "Surgical Debridement",
                 description: "Professional removal of non-viable tissue using surgical techniques to prepare the wound bed for optimal healing.",
-                imagePlaceholder: "[Surgical Debridement Photo]"
+                imageSrc: "/SX_Debridement.png"
               },
               {
                 title: "Water Debridement",
                 description: "Hydrotherapy-based wound cleaning that uses controlled water pressure to gently remove debris and promote healing.",
-                imagePlaceholder: "[Water Debridement System Photo]"
+                imageSrc: "/Water_Debridement_TX.png"
               },
               {
                 title: "Ultrasonic Debridement",
                 description: "State-of-the-art ultrasonic technology for precise, gentle removal of biofilm and non-viable tissue while preserving healthy tissue.",
-                imagePlaceholder: "[Ultrasonic Device Photo]"
+                imageSrc: "/Ultra_sonic_debridement.png"
               }
             ].map((treatment, index) => (
               <div
@@ -238,44 +273,37 @@ export default function ServicesPage() {
                 style={{
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
-                  padding: isMobile ? '1.5rem' : '2rem',
                   border: '1px solid #e5e7eb',
                   display: 'grid',
-                  gridTemplateColumns: isMobile ? '1fr' : '200px 1fr',
-                  gap: isMobile ? '1.5rem' : '2rem',
-                  alignItems: 'start'
+                  gridTemplateColumns: isMobile ? '1fr' : '300px 1fr',
+                  gap: 0,
+                  alignItems: 'start',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
                 }}
               >
-                {/* Image Placeholder */}
+                {/* Image */}
                 <div style={{
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '8px',
-                  padding: '1.5rem',
-                  textAlign: 'center',
+                  position: 'relative',
+                  width: '100%',
+                  height: isMobile ? '220px' : '100%',
+                  minHeight: '280px',
+                  backgroundColor: '#f8f9fa',
                   display: 'flex',
-                  flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  minHeight: '180px',
-                  border: '2px dashed #9ca3af'
+                  padding: isMobile ? '1.5rem' : '2rem'
                 }}>
-                  <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                    <polyline points="21 15 16 10 5 21"></polyline>
-                  </svg>
-                  <p style={{
-                    color: '#6b7280',
-                    fontSize: '0.75rem',
-                    marginTop: '0.75rem',
-                    fontWeight: '600'
-                  }}>
-                    {treatment.imagePlaceholder}
-                  </p>
+                  <Image
+                    src={treatment.imageSrc}
+                    alt={treatment.title}
+                    fill
+                    style={{ objectFit: 'contain', padding: isMobile ? '1.5rem' : '2rem' }}
+                  />
                 </div>
 
                 {/* Content */}
-                <div>
+                <div style={{ padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <h3 style={{
                     fontSize: isMobile ? '1.25rem' : '1.5rem',
                     fontWeight: 'bold',

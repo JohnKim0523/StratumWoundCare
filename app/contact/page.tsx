@@ -783,65 +783,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Emergency Protocol Section */}
-      <section style={{
-        backgroundColor: '#dc2626',
-        paddingTop: isMobile ? '2rem' : '3rem',
-        paddingBottom: isMobile ? '2rem' : '3rem'
-      }}>
-        <div style={{
-          maxWidth: '1400px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
-          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
-          textAlign: 'center'
-        }}>
-          <h2 style={{
-            fontSize: isMobile ? '1.75rem' : '2.5rem',
-            fontWeight: 'bold',
-            color: '#ffffff',
-            marginBottom: '1rem'
-          }}>
-            Medical Emergency?
-          </h2>
-          <p style={{
-            fontSize: isMobile ? '1rem' : '1.25rem',
-            color: '#fecaca',
-            marginBottom: '1.5rem',
-            maxWidth: '800px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}>
-            For life-threatening emergencies, call 911 immediately. For urgent wound care needs after hours, call our emergency line.
-          </p>
-          <a
-            href="tel:555-123-9999"
-            style={{
-              display: 'inline-block',
-              backgroundColor: '#ffffff',
-              color: '#dc2626',
-              padding: isMobile ? '1rem 2rem' : '1.25rem 3rem',
-              borderRadius: '8px',
-              fontWeight: 'bold',
-              fontSize: isMobile ? '1.125rem' : '1.25rem',
-              textDecoration: 'none',
-              transition: 'all 0.3s',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.3)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
-            }}
-          >
-            Call Emergency Line: (555) 123-9999
-          </a>
-        </div>
-      </section>
     </div>
     </PageTransition>
   );

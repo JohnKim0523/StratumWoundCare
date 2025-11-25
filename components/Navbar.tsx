@@ -36,7 +36,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'Meet Our Team' },
+    { href: '/about', label: 'About Us' },
     { href: '/patients', label: 'Insurance Info' },
     { href: '/providers', label: 'Patient Portal' },
   ];
