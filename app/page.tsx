@@ -810,52 +810,6 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Portal Access */}
-            <div
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="lock" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Portal Access
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                Access test results and visit summaries online
-              </p>
-              <a
-                href="#"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Patient portal →
-              </a>
-            </div>
-
             {/* FAQ */}
             <div
               style={{
@@ -1000,52 +954,6 @@ export default function Home() {
               gap: isMobile ? '1.5rem' : '2rem'
             }}
           >
-            {/* Referral Portal */}
-            <div
-              style={{
-                backgroundColor: '#f9fafb',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="lock" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Referral Portal
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                Secure HIPAA-compliant form submission for physicians
-              </p>
-              <Link
-                href="/providers"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Access portal →
-              </Link>
-            </div>
-
             {/* CMS Referral Data */}
             <div
               style={{

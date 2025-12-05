@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,52 +51,95 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In a production environment, you would:
-    // 1. Upload resume to cloud storage (AWS S3, Cloudinary, etc.)
-    // 2. Store application data in database
-    // 3. Send email notification to HR team
-    // 4. Send confirmation email to applicant
-    // 5. Integrate with ATS (Applicant Tracking System)
+    // Format position for display
+    const positionLabels: Record<string, string> = {
+      'physician': 'Physician',
+      'nurse-practitioner': 'Nurse Practitioner (NP)',
+      'registered-nurse': 'Registered Nurse (RN)',
+      'licensed-practical-nurse': 'Licensed Practical Nurse (LPN)',
+      'billing-specialist': 'Billing Specialist',
+      'clinical-director': 'Clinical Director',
+      'other': 'Other',
+    };
 
-    console.log('Career application received:', {
-      name,
-      email,
-      position,
-      resumeName: resume.name,
-      resumeSize: resume.size,
-      timestamp: new Date().toISOString(),
-    });
+    const positionDisplay = positionLabels[position] || position;
 
-    // Email content that would be sent in production
-    const emailContent = `
-      New Career Application
+    // Convert resume file to buffer for attachment
+    const resumeBuffer = Buffer.from(await resume.arrayBuffer());
 
-      Applicant: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Position: ${position}
-      Experience: ${experience}
+    // Build email content
+    const emailHtml = `
+      <h2>New Career Application</h2>
+      <p>You have received a new job application from the Stratum Wound Care website.</p>
 
-      ${message ? `Cover Letter:\n${message}\n` : ''}
+      <h3>Applicant Information</h3>
+      <ul>
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Phone:</strong> ${phone}</li>
+      </ul>
 
-      Resume: ${resume.name} (${(resume.size / 1024).toFixed(2)} KB)
+      <h3>Position Details</h3>
+      <ul>
+        <li><strong>Position:</strong> ${positionDisplay}</li>
+        <li><strong>Years of Experience:</strong> ${experience}</li>
+      </ul>
 
-      Submitted: ${new Date().toLocaleString()}
+      ${message ? `<h3>Cover Letter / Message</h3><p>${message}</p>` : ''}
+
+      <p><strong>Resume:</strong> ${resume.name} (attached)</p>
+
+      <hr />
+      <p style="color: #666; font-size: 12px;">
+        Submitted on ${new Date().toLocaleString('en-US', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        })}
+      </p>
     `;
 
-    // TODO: Implement actual file upload and email sending
-    //
-    // Example with AWS S3:
-    // const s3Key = `applications/${Date.now()}-${resume.name}`;
-    // await uploadToS3(resume, s3Key);
-    //
-    // Example email with attachment:
-    // await sendEmail({
-    //   to: process.env.HR_EMAIL!,
-    //   subject: `New Application - ${position}`,
-    //   body: emailContent,
-    //   attachments: [{ filename: resume.name, content: await resume.arrayBuffer() }]
-    // });
+    const emailText = `
+New Career Application
+
+Applicant Information:
+- Name: ${name}
+- Email: ${email}
+- Phone: ${phone}
+
+Position Details:
+- Position: ${positionDisplay}
+- Years of Experience: ${experience}
+
+${message ? `Cover Letter / Message:\n${message}\n` : ''}
+
+Resume: ${resume.name} (attached)
+
+Submitted: ${new Date().toLocaleString()}
+    `;
+
+    // Send email via Resend with resume attachment
+    const { error } = await resend.emails.send({
+      from: 'Stratum Wound Care <careers@stratumwoundcare.com>',
+      to: 'mark@stratumwoundcare.com',
+      subject: `New Job Application - ${positionDisplay} - ${name}`,
+      html: emailHtml,
+      text: emailText,
+      replyTo: email,
+      attachments: [
+        {
+          filename: resume.name,
+          content: resumeBuffer,
+        },
+      ],
+    });
+
+    if (error) {
+      console.error('Resend error:', error);
+      return NextResponse.json(
+        { error: 'Failed to send application' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {

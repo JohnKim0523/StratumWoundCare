@@ -38,7 +38,7 @@ export default function Navbar() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
     { href: '/patients', label: 'Insurance Info' },
-    { href: '/providers', label: 'Patient Portal' },
+    { href: '/careers', label: 'Careers' },
   ];
 
   return (
