@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 
     // Validate required fields
-    const requiredFields = ['name', 'email', 'phone', 'serviceInterest', 'message'];
+    const requiredFields = ['name', 'email', 'phone'];
 
     for (const field of requiredFields) {
       if (!data[field]) {
@@ -25,53 +28,89 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In a production environment, you would:
-    // 1. Store the inquiry in a database
-    // 2. Send email notifications to the clinic
-    // 3. Send confirmation email to the user
-    // 4. Integrate with CRM system
+    // Format appointment type for display
+    const appointmentTypeLabels: Record<string, string> = {
+      'new-patient': 'New Patient',
+      'follow-up': 'Follow-Up',
+      'consultation': 'Consultation',
+      'telehealth': 'Telehealth',
+    };
 
-    console.log('Contact form submission:', {
-      name: data.name,
-      email: data.email,
-      service: data.serviceInterest,
-      timestamp: new Date().toISOString(),
-    });
+    const appointmentTypeDisplay = data.appointmentType
+      ? appointmentTypeLabels[data.appointmentType] || data.appointmentType
+      : 'Not specified';
 
-    // Email content that would be sent in production
-    const emailContent = `
-      New Contact Form Submission
+    // Build email content
+    const emailHtml = `
+      <h2>New Appointment Request</h2>
+      <p>You have received a new appointment request from the Stratum Wound Care website.</p>
 
-      From: ${data.name}
-      Email: ${data.email}
-      Phone: ${data.phone}
-      Service Interest: ${data.serviceInterest}
+      <h3>Contact Information</h3>
+      <ul>
+        <li><strong>Name:</strong> ${data.name}</li>
+        <li><strong>Email:</strong> ${data.email}</li>
+        <li><strong>Phone:</strong> ${data.phone}</li>
+        <li><strong>Preferred Contact Method:</strong> ${data.preferredContact || 'Email'}</li>
+      </ul>
 
-      Message:
-      ${data.message}
+      <h3>Appointment Details</h3>
+      <ul>
+        <li><strong>Appointment Type:</strong> ${appointmentTypeDisplay}</li>
+        <li><strong>Insurance Provider:</strong> ${data.insurance || 'Not provided'}</li>
+      </ul>
 
-      Submitted: ${new Date().toLocaleString()}
+      ${data.message ? `<h3>Message</h3><p>${data.message}</p>` : ''}
+
+      <hr />
+      <p style="color: #666; font-size: 12px;">
+        Submitted on ${new Date().toLocaleString('en-US', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        })}
+      </p>
     `;
 
-    // TODO: Implement actual email sending using services like:
-    // - Resend (https://resend.com)
-    // - SendGrid
-    // - AWS SES
-    // - nodemailer with SMTP
+    const emailText = `
+New Appointment Request
 
-    // Example with Resend:
-    // await resend.emails.send({
-    //   from: 'noreply@stratumwoundcare.com',
-    //   to: process.env.CONTACT_EMAIL!,
-    //   subject: `New Contact Inquiry - ${data.serviceInterest}`,
-    //   text: emailContent,
-    // });
+Contact Information:
+- Name: ${data.name}
+- Email: ${data.email}
+- Phone: ${data.phone}
+- Preferred Contact Method: ${data.preferredContact || 'Email'}
+
+Appointment Details:
+- Appointment Type: ${appointmentTypeDisplay}
+- Insurance Provider: ${data.insurance || 'Not provided'}
+
+${data.message ? `Message:\n${data.message}` : ''}
+
+Submitted: ${new Date().toLocaleString()}
+    `;
+
+    // Send email via Resend
+    const { error } = await resend.emails.send({
+      from: 'Stratum Wound Care <appointments@stratumwoundcare.com>',
+      to: 'mark@stratumwoundcare.com',
+      subject: `New Appointment Request - ${data.name}`,
+      html: emailHtml,
+      text: emailText,
+      replyTo: data.email,
+    });
+
+    if (error) {
+      console.error('Resend error:', error);
+      return NextResponse.json(
+        { error: 'Failed to send email' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Contact form submitted successfully',
-        referenceId: `CONTACT-${Date.now()}`,
+        message: 'Appointment request submitted successfully',
+        referenceId: `APPT-${Date.now()}`,
       },
       { status: 200 }
     );
