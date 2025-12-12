@@ -99,34 +99,32 @@ export default function ServicesPage() {
               {
                 title: "Diabetic Foot Ulcers",
                 description: "Comprehensive care for diabetic foot complications including neuropathic and ischemic ulcers. Our specialized approach focuses on preventing amputations and promoting healing.",
-                hasImage: false
+                imageSrc: "/diabetic_foot_ulcer.png"
               },
               {
                 title: "Pressure Injuries",
                 description: "Expert treatment of pressure ulcers (bedsores) at all stages. We provide advanced wound care protocols to heal existing wounds and prevent recurrence.",
-                hasImage: false
+                imageSrc: "/pressure_injury.png"
               },
               {
                 title: "Wound Infections/Osteomyelitis(Bone Infection)/Cellulitis",
                 description: "Aggressive management of infected wounds with targeted antibiotic therapy, debridement, and advanced wound care techniques.",
-                hasImage: true,
                 imageSrc: "/Osteomylitis.png"
               },
               {
                 title: "Venous Leg Ulcers",
                 description: "Specialized treatment for ulcers caused by venous insufficiency, including compression therapy and advanced wound care.",
-                hasImage: true,
                 imageSrc: "/Venous_Leg_Ulcers.png"
               },
               {
                 title: "Arterial Ulcers",
                 description: "Management of wounds caused by arterial insufficiency with focus on improving circulation and promoting healing.",
-                hasImage: false
+                imageSrc: "/arterial_wounds.png"
               },
               {
                 title: "Surgical Wounds",
                 description: "Post-operative wound care including management of dehiscence, infection, and delayed healing.",
-                hasImage: false
+                imageSrc: "/surgical_wound.png"
               }
             ].map((wound, index) => (
               <div
@@ -139,67 +137,56 @@ export default function ServicesPage() {
                   transition: 'all 0.3s',
                   cursor: 'default',
                   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-                  display: wound.hasImage ? 'grid' : 'block',
-                  gridTemplateColumns: wound.hasImage && !isMobile ? '45% 1fr' : '1fr',
-                  minHeight: wound.hasImage && !isMobile ? '320px' : 'auto'
+                  display: 'flex',
+                  flexDirection: isMobile ? 'column' : 'row'
                 }}
               >
-                {wound.hasImage ? (
-                  <>
-                    <div style={{
+                {/* Square image thumbnail */}
+                <div style={{
+                  width: isMobile ? '100%' : '280px',
+                  height: isMobile ? '280px' : '280px',
+                  flexShrink: 0,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  backgroundColor: '#000000'
+                }}>
+                  <Image
+                    src={wound.imageSrc}
+                    alt={wound.title}
+                    width={280}
+                    height={280}
+                    style={{
+                      objectFit: 'cover',
                       width: '100%',
-                      height: isMobile ? '280px' : '100%',
-                      position: 'relative',
-                      backgroundColor: '#f8f9fa',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      padding: isMobile ? '1.5rem' : '2rem'
-                    }}>
-                      <Image
-                        src={wound.imageSrc || ''}
-                        alt={wound.title}
-                        fill
-                        style={{ objectFit: 'contain', padding: isMobile ? '1.5rem' : '2rem' }}
-                      />
-                    </div>
-                    <div style={{ padding: isMobile ? '1.5rem' : '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <h3 style={{
-                        fontSize: isMobile ? '1.25rem' : '1.75rem',
-                        fontWeight: 'bold',
-                        color: '#111827',
-                        marginBottom: '1rem'
-                      }}>
-                        {wound.title}
-                      </h3>
-                      <p style={{
-                        fontSize: isMobile ? '0.875rem' : '1.125rem',
-                        color: '#4b5563',
-                        lineHeight: '1.7'
-                      }}>
-                        {wound.description}
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <div style={{ padding: isMobile ? '1.5rem' : '2rem' }}>
-                    <h3 style={{
-                      fontSize: isMobile ? '1.25rem' : '1.5rem',
-                      fontWeight: 'bold',
-                      color: '#111827',
-                      marginBottom: '1rem'
-                    }}>
-                      {wound.title}
-                    </h3>
-                    <p style={{
-                      fontSize: isMobile ? '0.875rem' : '1rem',
-                      color: '#374151',
-                      lineHeight: '1.6'
-                    }}>
-                      {wound.description}
-                    </p>
-                  </div>
-                )}
+                      height: '100%',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+                {/* Text fills remaining space */}
+                <div style={{
+                  padding: isMobile ? '1.5rem' : '2.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  flex: 1
+                }}>
+                  <h3 style={{
+                    fontSize: isMobile ? '1.25rem' : '1.75rem',
+                    fontWeight: 'bold',
+                    color: '#111827',
+                    marginBottom: '1rem'
+                  }}>
+                    {wound.title}
+                  </h3>
+                  <p style={{
+                    fontSize: isMobile ? '0.875rem' : '1.125rem',
+                    color: '#4b5563',
+                    lineHeight: '1.7'
+                  }}>
+                    {wound.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

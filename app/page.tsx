@@ -214,7 +214,7 @@ export default function Home() {
               <div style={{
                 position: 'relative',
                 overflow: 'hidden',
-                minHeight: isMobile ? '200px' : '280px'
+                minHeight: isMobile ? '320px' : '280px'
               }}>
                 <div
                   style={{
@@ -385,137 +385,90 @@ export default function Home() {
                   gridTemplateColumns: isMobile
                     ? '1fr'
                     : isTablet
-                    ? '1fr'
-                    : 'repeat(2, 1fr)',
-                  gap: isMobile ? '1.5rem' : '2rem'
+                    ? 'repeat(2, 1fr)'
+                    : 'repeat(3, 1fr)',
+                  gap: isMobile ? '1rem' : '1.25rem'
                 }}
               >
                 {[
-                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", icon: "shield", color: '#374151', hasImage: false },
-                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", icon: "hospital", color: '#374151', hasImage: false },
-                  { title: "Wound Infections/ Osteomyelitis (Bone Infection) / Cellulitis", description: "Expert treatment of infected wounds and complications", icon: "alert", color: '#374151', hasImage: true, imageSrc: "/Osteomylitis.png" },
-                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", icon: "heart", color: '#374151', hasImage: true, imageSrc: "/Venous_Leg_Ulcers.png" },
-                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", icon: "heart", color: '#374151', hasImage: false },
-                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", icon: "clipboard", color: '#374151', hasImage: false }
+                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", imageSrc: "/diabetic_foot_ulcer.png" },
+                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", imageSrc: "/pressure_injury.png" },
+                  { title: "Wound Infections & Osteomyelitis", description: "Expert treatment of infected wounds, bone infections, and cellulitis", imageSrc: "/Osteomylitis.png" },
+                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", imageSrc: "/Venous_Leg_Ulcers.png" },
+                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", imageSrc: "/arterial_wounds.png" },
+                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", imageSrc: "/surgical_wound.png" }
                 ].map((service, index) => (
                   <div
                     key={index}
                     style={{
-                      backgroundColor: colors.primary.navy,
-                      borderRadius: '12px',
                       transition: 'all 0.3s',
-                      position: 'relative',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: '100%',
                       overflow: 'hidden',
-                      border: `1px solid ${colors.primary.blue}40`
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      height: isMobile ? '140px' : '180px'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow = `0 8px 20px rgba(8, 145, 220, 0.3)`;
+                      e.currentTarget.style.transform = 'translateY(-3px)';
+                      e.currentTarget.style.boxShadow = `0 8px 20px rgba(0, 0, 0, 0.4)`;
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
-                    {service.hasImage ? (
-                      <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : '45% 1fr',
-                        gap: 0,
-                        height: '100%',
-                        minHeight: isMobile ? 'auto' : '320px'
-                      }}>
-                        <div style={{
+                    {/* Thumbnail */}
+                    <div style={{
+                      width: isMobile ? '140px' : '180px',
+                      height: isMobile ? '140px' : '180px',
+                      flexShrink: 0,
+                      position: 'relative',
+                      overflow: 'hidden',
+                      backgroundColor: '#000000'
+                    }}>
+                      <Image
+                        src={service.imageSrc}
+                        alt={service.title}
+                        width={180}
+                        height={180}
+                        style={{
+                          objectFit: 'cover',
                           width: '100%',
-                          height: isMobile ? '220px' : '100%',
-                          position: 'relative',
-                          backgroundColor: '#f8f9fa',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          padding: '1rem'
-                        }}>
-                          <Image
-                            src={service.imageSrc || ''}
-                            alt={service.title}
-                            fill
-                            style={{ objectFit: 'contain', padding: '1rem' }}
-                          />
-                        </div>
-                        <div style={{ padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <h3
-                            className="font-bold"
-                            style={{
-                              color: '#ffffff',
-                              marginBottom: '0.75rem',
-                              fontSize: isMobile ? '1.125rem' : '1.375rem'
-                            }}
-                          >
-                            {service.title}
-                          </h3>
-                          <p
-                            style={{
-                              color: '#d1d5db',
-                              fontSize: isMobile ? '0.875rem' : '1rem',
-                              lineHeight: '1.6'
-                            }}
-                          >
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : '45% 1fr',
-                        gap: 0,
-                        height: '100%',
-                        minHeight: isMobile ? 'auto' : '320px'
-                      }}>
-                        <div style={{
-                          width: '100%',
-                          height: isMobile ? '220px' : '100%',
-                          backgroundColor: '#f8f9fa',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          border: '2px dashed #d1d5db'
-                        }}>
-                          <div style={{ textAlign: 'center', padding: '2rem' }}>
-                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" style={{ margin: '0 auto 1rem' }}>
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                              <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                            <p style={{ color: '#9ca3af', fontSize: '0.875rem', fontWeight: '500' }}>Image Coming Soon</p>
-                          </div>
-                        </div>
-                        <div style={{ padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                          <h3
-                            className="font-bold"
-                            style={{
-                              color: '#ffffff',
-                              marginBottom: '0.75rem',
-                              fontSize: isMobile ? '1.125rem' : '1.375rem'
-                            }}
-                          >
-                            {service.title}
-                          </h3>
-                          <p
-                            style={{
-                              color: '#d1d5db',
-                              fontSize: isMobile ? '0.875rem' : '1rem',
-                              lineHeight: '1.6'
-                            }}
-                          >
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
-                    )}
+                          height: '100%',
+                          display: 'block'
+                        }}
+                      />
+                    </div>
+                    {/* Text content - this has the blue background */}
+                    <div style={{
+                      padding: isMobile ? '0.875rem' : '1.25rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      flex: 1,
+                      backgroundColor: colors.primary.navy
+                    }}>
+                      <h3
+                        className="font-bold"
+                        style={{
+                          color: '#ffffff',
+                          marginBottom: '0.4rem',
+                          fontSize: isMobile ? '1rem' : '1.125rem',
+                          lineHeight: '1.3'
+                        }}
+                      >
+                        {service.title}
+                      </h3>
+                      <p
+                        style={{
+                          color: '#d1d5db',
+                          fontSize: isMobile ? '0.8125rem' : '0.9375rem',
+                          lineHeight: '1.4'
+                        }}
+                      >
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
