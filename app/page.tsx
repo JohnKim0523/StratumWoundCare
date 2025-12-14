@@ -209,108 +209,279 @@ export default function Home() {
                 >
                   Our Commitment
                 </h2>
+                <h2
+                  onClick={() => setActiveTab('strata')}
+                  className="font-bold cursor-pointer transition-all duration-300"
+                  style={{
+                    color: activeTab === 'strata' ? colors.primary.navy : colors.neutral.lightGray,
+                    borderBottom: activeTab === 'strata' ? `4px solid ${colors.primary.blue}` : 'none',
+                    paddingBottom: '0.5rem',
+                    display: 'inline-block',
+                    fontSize: isMobile
+                      ? (activeTab === 'strata' ? '1.25rem' : '1.125rem')
+                      : (activeTab === 'strata' ? '1.75rem' : '1.375rem'),
+                    transform: 'scale(1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== 'strata') {
+                      e.currentTarget.style.color = colors.neutral.mediumGray;
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeTab !== 'strata') {
+                      e.currentTarget.style.color = colors.neutral.lightGray;
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }
+                  }}
+                >
+                  STRATA
+                </h2>
               </div>
               {/* Content that changes based on tab */}
-              <div style={{
-                position: 'relative',
-                overflow: 'hidden',
-                minHeight: isMobile ? '320px' : '280px'
-              }}>
-                <div
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
-                    transform: activeTab === 'about' ? 'translateX(0)' : 'translateX(-100%)',
-                    opacity: activeTab === 'about' ? 1 : 0
-                  }}
-                >
-                  <p style={{
-                    fontSize: isMobile ? '1rem' : '1.125rem',
-                    color: '#374151',
-                    lineHeight: '1.8',
-                    marginBottom: isMobile ? '1rem' : '1.5rem'
-                  }}>
-                    At Stratum Wound Care, we specialize in providing comprehensive wound management services
-                    to patients throughout Pennsylvania. Our team of experienced healthcare professionals is
-                    dedicated to healing complex wounds and preventing amputations.
-                  </p>
-                  <p style={{
-                    fontSize: isMobile ? '1rem' : '1.125rem',
-                    color: '#374151',
-                    lineHeight: '1.8',
-                    marginBottom: isMobile ? '1rem' : '1.5rem'
-                  }}>
-                    With years of experience in home health and community-based wound care, we understand
-                    the unique challenges faced by patients with chronic wounds. Our patient-centered approach
-                    combines cutting-edge treatments with compassionate care.
-                  </p>
-                  <Link
-                    href="/about"
-                    className="inline-block font-semibold transition-all duration-300"
-                    style={{
-                      color: colors.primary.blue,
-                      fontSize: '1.125rem',
-                      borderBottom: `2px solid ${colors.primary.blue}`,
-                      paddingBottom: '4px'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = colors.secondary.darkBlue;
-                      e.currentTarget.style.borderBottomColor = colors.secondary.darkBlue;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = colors.primary.blue;
-                      e.currentTarget.style.borderBottomColor = colors.primary.blue;
-                    }}
-                  >
-                    Learn More About Us →
-                  </Link>
-                </div>
+              <div>
+                {/* About Tab Content */}
+                {activeTab === 'about' && (
+                  <div>
+                    <p style={{
+                      fontSize: isMobile ? '1rem' : '1.125rem',
+                      color: '#374151',
+                      lineHeight: '1.8',
+                      marginBottom: isMobile ? '1rem' : '1.5rem'
+                    }}>
+                      At Stratum Wound Care, we specialize in providing comprehensive wound management services
+                      to patients throughout Pennsylvania. Our team of experienced healthcare professionals is
+                      dedicated to healing complex wounds and preventing amputations.
+                    </p>
+                    <p style={{
+                      fontSize: isMobile ? '1rem' : '1.125rem',
+                      color: '#374151',
+                      lineHeight: '1.8',
+                      marginBottom: isMobile ? '1rem' : '1.5rem'
+                    }}>
+                      With years of experience in home health and community-based wound care, we understand
+                      the unique challenges faced by patients with chronic wounds. Our patient-centered approach
+                      combines cutting-edge treatments with compassionate care.
+                    </p>
+                    <Link
+                      href="/about"
+                      className="inline-block font-semibold transition-all duration-300"
+                      style={{
+                        color: colors.primary.blue,
+                        fontSize: '1.125rem',
+                        borderBottom: `2px solid ${colors.primary.blue}`,
+                        paddingBottom: '4px'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = colors.secondary.darkBlue;
+                        e.currentTarget.style.borderBottomColor = colors.secondary.darkBlue;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = colors.primary.blue;
+                        e.currentTarget.style.borderBottomColor = colors.primary.blue;
+                      }}
+                    >
+                      Learn More About Us →
+                    </Link>
+                  </div>
+                )}
 
-                <div
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
-                    transform: activeTab === 'commitment' ? 'translateX(0)' : 'translateX(100%)',
-                    opacity: activeTab === 'commitment' ? 1 : 0
-                  }}
-                >
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center mr-4">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                {/* Commitment Tab Content */}
+                {activeTab === 'commitment' && (
+                  <div>
+                    <p style={{
+                      fontSize: isMobile ? '1rem' : '1.125rem',
+                      color: '#374151',
+                      lineHeight: '1.8',
+                      marginBottom: isMobile ? '1rem' : '1.5rem'
+                    }}>
+                      Stratum Wound Care operates as a dedicated Advancement Clinic, delivering expert care through both convenient in-office appointments and coordinated At-Home Services. Our core mandate is to fundamentally redefine the standard of excellence in wound care.
+                    </p>
+                    <p style={{
+                      fontSize: isMobile ? '1rem' : '1.125rem',
+                      color: '#374151',
+                      lineHeight: '1.8',
+                      marginBottom: isMobile ? '1rem' : '1.5rem'
+                    }}>
+                      The Stratum team embodies the finest clinical and organizational expertise, meticulously hand-selected through an extensive and rigorous vetting process.
+                    </p>
+                    <p style={{
+                      fontSize: isMobile ? '1rem' : '1.125rem',
+                      color: '#374151',
+                      lineHeight: '1.8'
+                    }}>
+                      Founded by Mark Hoffner, Stratum Wound Care is built on an unwavering commitment to our patients and a promise to the broader healthcare community. We dedicate our absolute best to every individual we serve, operating with integrity and pride. At Stratum, we are proud to restore patient health through the exceptional care delivered by our expert team.
+                    </p>
+                  </div>
+                )}
+
+                {/* STRATA Tab Content */}
+                {activeTab === 'strata' && (
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: isMobile ? '1.5rem' : '2rem'
+                  }}>
+                    {/* Step 1 */}
+                    <div style={{
+                      backgroundColor: '#ffffff',
+                      borderRadius: '12px',
+                      border: '1px solid #e5e7eb',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                      display: 'flex',
+                      flexDirection: isMobile ? 'column' : 'row',
+                      overflow: 'hidden'
+                    }}>
+                      <div style={{
+                        width: isMobile ? '100%' : '200px',
+                        height: isMobile ? '180px' : '200px',
+                        flexShrink: 0,
+                        position: 'relative'
+                      }}>
+                        <Image
+                          src="/photo1.png"
+                          alt="Assessment & Deep Diagnosis"
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
                       </div>
-                      <span className="text-gray-800 font-medium text-lg">CMS and PA Department of Health compliant</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center mr-4">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                      <div style={{ padding: isMobile ? '1.25rem' : '1.5rem', flex: 1 }}>
+                        <h4 style={{
+                          fontSize: isMobile ? '1.125rem' : '1.25rem',
+                          fontWeight: 'bold',
+                          color: '#111827',
+                          marginBottom: '0.75rem'
+                        }}>
+                          1. Assessment & Deep Diagnosis
+                        </h4>
+                        <p style={{
+                          fontSize: isMobile ? '0.875rem' : '1rem',
+                          color: '#374151',
+                          lineHeight: '1.7'
+                        }}>
+                          We move beyond surface-level visual inspection. Utilizing advanced diagnostics, we meticulously map the full depth of the wound and identify all underlying systemic factors contributing to both acute and chronic non-healing wounds. This ensures our treatment targets the root cause, not just the symptom.
+                        </p>
                       </div>
-                      <span className="text-gray-800 font-medium text-lg">HIPAA certified and secure practices</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center mr-4">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div style={{
+                      backgroundColor: '#ffffff',
+                      borderRadius: '12px',
+                      border: '1px solid #e5e7eb',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                      display: 'flex',
+                      flexDirection: isMobile ? 'column' : 'row',
+                      overflow: 'hidden'
+                    }}>
+                      <div style={{
+                        width: isMobile ? '100%' : '200px',
+                        height: isMobile ? '180px' : '200px',
+                        flexShrink: 0,
+                        position: 'relative'
+                      }}>
+                        <Image
+                          src="/photo2.png"
+                          alt="Systemic Stabilization"
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
                       </div>
-                      <span className="text-gray-800 font-medium text-lg">Medicare and Medicaid certified</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center mr-4">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                      <div style={{ padding: isMobile ? '1.25rem' : '1.5rem', flex: 1 }}>
+                        <h4 style={{
+                          fontSize: isMobile ? '1.125rem' : '1.25rem',
+                          fontWeight: 'bold',
+                          color: '#111827',
+                          marginBottom: '0.75rem'
+                        }}>
+                          2. Systemic Stabilization
+                        </h4>
+                        <p style={{
+                          fontSize: isMobile ? '0.875rem' : '1rem',
+                          color: '#374151',
+                          lineHeight: '1.7'
+                        }}>
+                          Wound healing is a whole-body endeavor. We address all co-morbidities and systemic factors—such as nutrition, circulation, and diabetes management—that can impede healing. By optimizing the patient's overall health, we ensure the body's internal environment is fertile and prepared for tissue regeneration before advanced local treatments begin.
+                        </p>
                       </div>
-                      <span className="text-gray-800 font-medium text-lg">Evidence-based treatment protocols</span>
-                    </li>
-                  </ul>
-                </div>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div style={{
+                      backgroundColor: '#ffffff',
+                      borderRadius: '12px',
+                      border: '1px solid #e5e7eb',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+                      display: 'flex',
+                      flexDirection: isMobile ? 'column' : 'row',
+                      overflow: 'hidden'
+                    }}>
+                      <div style={{
+                        width: isMobile ? '100%' : '200px',
+                        height: isMobile ? '180px' : '200px',
+                        flexShrink: 0,
+                        position: 'relative'
+                      }}>
+                        <Image
+                          src="/photo3.png"
+                          alt="Layer-by-Layer Regeneration"
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                      <div style={{ padding: isMobile ? '1.25rem' : '1.5rem', flex: 1 }}>
+                        <h4 style={{
+                          fontSize: isMobile ? '1.125rem' : '1.25rem',
+                          fontWeight: 'bold',
+                          color: '#111827',
+                          marginBottom: '0.75rem'
+                        }}>
+                          3. Layer-by-Layer Regeneration
+                        </h4>
+                        <p style={{
+                          fontSize: isMobile ? '0.875rem' : '1rem',
+                          color: '#374151',
+                          lineHeight: '1.7'
+                        }}>
+                          This is where the Stratum principle comes to life. Our treatments focus methodically on healing and rebuilding from the foundation up. We prioritize promoting deep tissue repair, blood flow, and granulation before securing the protective epidermal barrier. This staged, disciplined approach is the key to achieving robust and long-lasting wound closure.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Step 4 */}
+                    <div style={{
+                      backgroundColor: '#ffffff',
+                      borderRadius: '12px',
+                      padding: isMobile ? '1.25rem' : '1.5rem',
+                      border: '1px solid #e5e7eb',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
+                    }}>
+                      <h4 style={{
+                        fontSize: isMobile ? '1.125rem' : '1.25rem',
+                        fontWeight: 'bold',
+                        color: '#111827',
+                        marginBottom: '0.75rem'
+                      }}>
+                        4. Restoring Integrity to Life
+                      </h4>
+                      <p style={{
+                        fontSize: isMobile ? '0.875rem' : '1rem',
+                        color: '#374151',
+                        lineHeight: '1.7',
+                        marginBottom: '1rem'
+                      }}>
+                        At Stratum Wound Care we dedicate ourselves to restoring the integrity of our patients' lives, ensuring they regain a strong, lasting foundation for renewed health. Stratum Wound Care's ultimate goal is to empower patients, liberating them from the pain, constraints, and daily complications of unhealed wounds so they can finally reclaim their quality of life.
+                      </p>
+                      <p style={{
+                        fontSize: isMobile ? '0.875rem' : '1rem',
+                        color: '#374151',
+                        lineHeight: '1.7'
+                      }}>
+                        Our mission extends far beyond the physical closure of a wound. While healing is our clinical goal, our driving force is the profound desire to provide clinical excellence that results in a full, complete, and resilient recovery.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -391,22 +562,24 @@ export default function Home() {
                 }}
               >
                 {[
-                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", imageSrc: "/diabetic_foot_ulcer.png" },
-                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", imageSrc: "/pressure_injury.png" },
-                  { title: "Wound Infections & Osteomyelitis", description: "Expert treatment of infected wounds, bone infections, and cellulitis", imageSrc: "/Osteomylitis.png" },
-                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", imageSrc: "/Venous_Leg_Ulcers.png" },
-                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", imageSrc: "/arterial_wounds.png" },
-                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", imageSrc: "/surgical_wound.png" }
+                  { title: "Diabetic Foot Ulcers", description: "Specialized care for diabetic foot ulcers and complications", imageSrc: "/diabetic_foot_ulcer.png", href: "/services#diabetic-foot-ulcers" },
+                  { title: "Pressure Injuries", description: "Treatment and prevention of bedsores and pressure wounds", imageSrc: "/pressure_injury.png", href: "/services#pressure-injuries" },
+                  { title: "Wound Infections & Osteomyelitis", description: "Expert treatment of infected wounds, bone infections, and cellulitis", imageSrc: "/Osteomylitis.png", href: "/services#wound-infections" },
+                  { title: "Venous Leg Ulcers", description: "Advanced treatment for venous insufficiency wounds", imageSrc: "/Venous_Leg_Ulcers.png", href: "/services#venous-leg-ulcers" },
+                  { title: "Arterial Ulcers", description: "Care for wounds caused by arterial insufficiency", imageSrc: "/arterial_wounds.png", href: "/services#arterial-ulcers" },
+                  { title: "Surgical Wounds", description: "Post-operative wound management and healing", imageSrc: "/surgical_wound.png", href: "/services#surgical-wounds" }
                 ].map((service, index) => (
-                  <div
+                  <Link
                     key={index}
+                    href={service.href}
                     style={{
                       transition: 'all 0.3s',
                       overflow: 'hidden',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'row',
-                      height: isMobile ? '140px' : '180px'
+                      height: isMobile ? '140px' : '180px',
+                      textDecoration: 'none'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateY(-3px)';
@@ -469,7 +642,7 @@ export default function Home() {
                         {service.description}
                       </p>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -636,7 +809,7 @@ export default function Home() {
               marginBottom: isMobile ? '2rem' : '3rem'
             }}
           >
-            {/* Accepted Insurances */}
+            {/* Accepted Insurance */}
             <div
               style={{
                 backgroundColor: '#ffffff',
@@ -657,10 +830,10 @@ export default function Home() {
                   marginBottom: '1rem'
                 }}
               >
-                Accepted Insurances
+                Accepted Insurance
               </h3>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {['Medicare', 'Medicaid', 'Major private insurers'].map((item, index) => (
+                {['Medicare'].map((item, index) => (
                   <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
                     <span style={{ color: '#10b981', fontSize: '1.25rem', marginRight: '0.5rem' }}>✓</span>
                     <span style={{ color: '#374151', fontSize: isMobile ? '0.875rem' : '1rem' }}>
@@ -669,98 +842,6 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Referrals */}
-            <div
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="clipboard" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Referrals
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                Step-by-step guide for physicians and home health agencies
-              </p>
-              <Link
-                href="/providers"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Learn more →
-              </Link>
-            </div>
-
-            {/* Patient Forms */}
-            <div
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="fileText" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Patient Forms
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                Downloadable new patient forms (HIPAA compliant PDFs)
-              </p>
-              <Link
-                href="/patients"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Download forms →
-              </Link>
             </div>
 
             {/* FAQ */}
@@ -852,150 +933,6 @@ export default function Home() {
                 }}
               >
                 Contact us →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Provider Referrals Section */}
-      <section
-        style={{
-          paddingTop: isMobile ? '3rem' : '5rem',
-          paddingBottom: isMobile ? '3rem' : '5rem',
-          backgroundColor: '#ffffff'
-        }}
-      >
-        <div
-          style={{
-            paddingLeft: isMobile ? '1.5rem' : isTablet ? '3rem' : '4rem',
-            paddingRight: isMobile ? '1.5rem' : isTablet ? '3rem' : '4rem',
-            maxWidth: '1400px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: isMobile ? '2rem' : isTablet ? '2.5rem' : '3rem',
-              fontWeight: 'bold',
-              color: '#111827',
-              marginBottom: '1rem',
-              textAlign: 'center'
-            }}
-          >
-            Provider Referrals
-          </h2>
-          <p
-            style={{
-              fontSize: isMobile ? '1rem' : '1.25rem',
-              color: '#6b7280',
-              textAlign: 'center',
-              marginBottom: isMobile ? '2.5rem' : '3.5rem',
-              maxWidth: '700px',
-              marginLeft: 'auto',
-              marginRight: 'auto'
-            }}
-          >
-            Streamlined referral process for healthcare providers
-          </p>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-              gap: isMobile ? '1.5rem' : '2rem'
-            }}
-          >
-            {/* CMS Referral Data */}
-            <div
-              style={{
-                backgroundColor: '#f9fafb',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="barChart" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Referral Data
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                CMS referral density visualization by Orange County and PA towns
-              </p>
-              <a
-                href="#"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                View data →
-              </a>
-            </div>
-
-            {/* Specialist Collaboration */}
-            <div
-              style={{
-                backgroundColor: '#f9fafb',
-                borderRadius: '12px',
-                padding: isMobile ? '1.5rem' : '2rem',
-                border: '1px solid #e5e7eb',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="handshake" size={40} color="#6b7280" />
-              </div>
-              <h3
-                style={{
-                  fontSize: isMobile ? '1.25rem' : '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1rem'
-                }}
-              >
-                Specialist Collaboration
-              </h3>
-              <p
-                style={{
-                  color: '#374151',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  lineHeight: '1.6',
-                  marginBottom: '1rem'
-                }}
-              >
-                Endocrinology and podiatry partnership programs
-              </p>
-              <Link
-                href="/providers#collaboration"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Learn more →
               </Link>
             </div>
           </div>
@@ -1180,9 +1117,7 @@ export default function Home() {
                   marginLeft: '2.5rem',
                   lineHeight: '1.6'
                 }}>
-                  Main: (555) 123-4567<br />
-                  Provider Line: (555) 123-4568<br />
-                  Emergency: (555) 123-9999
+                  (862) 306-6367
                 </p>
               </div>
 

@@ -147,26 +147,9 @@ export default function ContactPage() {
               <p style={{
                 color: '#374151',
                 fontSize: isMobile ? '0.875rem' : '1rem',
-                lineHeight: '1.6',
-                marginBottom: '0.5rem'
+                lineHeight: '1.6'
               }}>
-                Main: <a href="tel:555-123-4567" style={{ color: '#111827', fontWeight: '600' }}>(555) 123-4567</a>
-              </p>
-              <p style={{
-                color: '#374151',
-                fontSize: isMobile ? '0.875rem' : '1rem',
-                lineHeight: '1.6',
-                marginBottom: '0.5rem'
-              }}>
-                Provider: <a href="tel:555-123-4568" style={{ color: '#111827', fontWeight: '600' }}>(555) 123-4568</a>
-              </p>
-              <p style={{
-                color: '#dc2626',
-                fontSize: isMobile ? '0.875rem' : '1rem',
-                lineHeight: '1.6',
-                fontWeight: '600'
-              }}>
-                Emergency: <a href="tel:555-123-9999" style={{ color: '#dc2626' }}>(555) 123-9999</a>
+                <a href="tel:862-306-6367" style={{ color: '#111827', fontWeight: '600' }}>(862) 306-6367</a>
               </p>
             </div>
 

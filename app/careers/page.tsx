@@ -369,56 +369,6 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Team Photo Section */}
-      <section style={{
-        backgroundColor: '#f9fafb',
-        paddingTop: isMobile ? '3rem' : '4rem',
-        paddingBottom: isMobile ? '3rem' : '4rem'
-      }}>
-        <div style={{
-          maxWidth: '1400px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
-          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
-        }}>
-          {/* Image Placeholder - Team/Office Culture */}
-          <div style={{
-            backgroundColor: '#e5e7eb',
-            borderRadius: '12px',
-            padding: '3rem',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '400px',
-            border: '2px dashed #9ca3af'
-          }}>
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg>
-            <p style={{
-              color: '#6b7280',
-              fontSize: '1rem',
-              marginTop: '1rem',
-              fontWeight: '600'
-            }}>
-              [Team Culture / Office Environment Photo]
-            </p>
-            <p style={{
-              color: '#9ca3af',
-              fontSize: '0.875rem',
-              marginTop: '0.5rem'
-            }}>
-              Suggested: Team meeting, collaborative work environment, or happy staff
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Application Section */}
       <section style={{
         backgroundColor: '#ffffff',

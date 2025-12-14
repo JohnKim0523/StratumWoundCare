@@ -74,7 +74,7 @@ export default function AboutPage() {
               color: '#111827',
               marginBottom: '1.5rem'
             }}>
-              Our Mission
+              Mission Statement
             </h2>
             <p style={{
               fontSize: isMobile ? '1rem' : '1.125rem',
@@ -82,7 +82,7 @@ export default function AboutPage() {
               lineHeight: '1.8',
               marginBottom: '1.5rem'
             }}>
-              Stratum Wound Care is a premier wound care clinic serving patients throughout Pennsylvania. Our clinic operates under an MSO-PC (Management Services Organization - Professional Corporation) model, ensuring the highest standards of both clinical care and operational excellence.
+              At Stratum Wound Care Solutions, our name is our mission. It refers directly to the vital, multi-layered structure of the skin—from the outermost protective stratum corneum to the deepest regenerative layers.
             </p>
             <p style={{
               fontSize: isMobile ? '1rem' : '1.125rem',
@@ -90,14 +90,14 @@ export default function AboutPage() {
               lineHeight: '1.8',
               marginBottom: '1.5rem'
             }}>
-              Providing advanced wound healing and limb preservation to help patients stay safe, healthy, and home. We are committed to delivering evidence-based, compassionate care that improves outcomes and enhances quality of life for every patient we serve.
+              We understand that true, lasting wound recovery requires more than just a surface fix. It demands a holistic, methodical process. Our expert clinicians apply this fundamental biological principle to your care, crafting a customized treatment plan that focuses on healing one layer at a time.
             </p>
             <p style={{
               fontSize: isMobile ? '1rem' : '1.125rem',
               color: '#374151',
               lineHeight: '1.8'
             }}>
-              With deep roots in home health and community-based wound care, our team brings decades of combined experience in treating complex wounds. We understand that every patient's healing journey is unique, and we tailor our approach to meet individual needs.
+              We don't just treat the wound; we restore the integrity of the strata, ensuring a strong, resilient foundation for a full and complete recovery. Stratum Wound Care is a premier wound care clinic serving patients throughout Pennsylvania.
             </p>
           </div>
         </div>

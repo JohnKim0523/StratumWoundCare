@@ -21,21 +21,24 @@ export default function PatientsPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Scroll to hash element
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
   const insuranceCards = [
     {
       icon: 'hospital',
       title: 'Medicare',
       description: 'We accept all Medicare plans including Medicare Advantage'
-    },
-    {
-      icon: 'shield',
-      title: 'Medicaid',
-      description: 'PA Medicaid and Medical Assistance programs accepted'
-    },
-    {
-      icon: 'briefcase',
-      title: 'Private Insurance',
-      description: 'Most major private insurance plans accepted'
     }
   ];
 
@@ -47,25 +50,6 @@ export default function PatientsPage() {
     'Completed new patient forms (download below)',
     'List of allergies',
     'Medical history including previous surgeries'
-  ];
-
-  const downloadableForms = [
-    {
-      title: 'New Patient Registration Form',
-      description: 'Basic demographic and insurance information'
-    },
-    {
-      title: 'Medical History Form',
-      description: 'Comprehensive health history questionnaire'
-    },
-    {
-      title: 'HIPAA Authorization Form',
-      description: 'Privacy practices and authorization'
-    },
-    {
-      title: 'Consent for Treatment Form',
-      description: 'Treatment consent and acknowledgment'
-    }
   ];
 
   const faqs = [
@@ -153,17 +137,17 @@ export default function PatientsPage() {
             </h2>
 
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : (isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'),
-              gap: '2rem',
-              marginBottom: '3rem'
+              display: 'flex',
+              justifyContent: 'center'
             }}>
               {insuranceCards.map((card, index) => (
                 <div key={index} style={{
                   backgroundColor: '#f9fafb',
                   padding: '2rem',
                   borderRadius: '0.5rem',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  maxWidth: '400px',
+                  width: '100%'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
                     <Icon type={card.icon as any} size={64} color="#6b7280" />
@@ -181,48 +165,6 @@ export default function PatientsPage() {
                   </p>
                 </div>
               ))}
-            </div>
-
-            <div style={{
-              backgroundColor: '#f9fafb',
-              padding: '2rem',
-              borderRadius: '0.5rem'
-            }}>
-              <h3 style={{
-                fontSize: '1.5rem',
-                fontWeight: '700',
-                color: '#111827',
-                marginBottom: '1.5rem'
-              }}>
-                Major Insurance Providers We Accept
-              </h3>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                gap: '1rem',
-                color: '#4b5563'
-              }}>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  <li style={{ marginBottom: '0.5rem' }}>• Aetna</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• Blue Cross Blue Shield</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• Cigna</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• Highmark</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• Humana</li>
-                </ul>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  <li style={{ marginBottom: '0.5rem' }}>• Independence Blue Cross</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• UnitedHealthcare</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• WellSpan</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• UPMC</li>
-                  <li style={{ marginBottom: '0.5rem' }}>• And many others</li>
-                </ul>
-              </div>
-              <p style={{ marginTop: '1.5rem', color: '#4b5563' }}>
-                Don't see your insurance listed?{' '}
-                <Link href="/contact" style={{ color: '#2563eb', fontWeight: '600' }}>
-                  Contact us to verify
-                </Link>
-              </p>
             </div>
           </div>
         </section>
@@ -251,9 +193,8 @@ export default function PatientsPage() {
             </h2>
 
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-              gap: '2rem'
+              maxWidth: '600px',
+              margin: '0 auto'
             }}>
               <div style={{
                 backgroundColor: '#ffffff',
@@ -282,153 +223,18 @@ export default function PatientsPage() {
                   ))}
                 </ul>
               </div>
-
-              <div style={{
-                backgroundColor: '#ffffff',
-                padding: '2rem',
-                borderRadius: '0.5rem',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-              }}>
-                <h3 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: '700',
-                  color: '#111827',
-                  marginBottom: '1.5rem'
-                }}>
-                  Downloadable Forms
-                </h3>
-                <p style={{ color: '#4b5563', marginBottom: '1.5rem' }}>
-                  Complete these HIPAA-compliant forms before your visit to expedite check-in:
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {downloadableForms.map((form, index) => (
-                    <div key={index} style={{
-                      border: '1px solid #e5e7eb',
-                      padding: '1rem',
-                      borderRadius: '0.5rem',
-                      transition: 'border-color 0.3s'
-                    }}>
-                      <h4 style={{
-                        fontWeight: '600',
-                        color: '#111827',
-                        marginBottom: '0.5rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem'
-                      }}>
-                        <Icon type="fileText" size={20} color="#6b7280" />
-                        {form.title}
-                      </h4>
-                      <p style={{
-                        fontSize: '0.875rem',
-                        color: '#6b7280',
-                        marginBottom: '0.75rem'
-                      }}>
-                        {form.description}
-                      </p>
-                      <button style={{
-                        color: colors.primary.blue,
-                        fontWeight: '600',
-                        fontSize: '0.875rem',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: 0
-                      }}>
-                        Download PDF →
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Patient Portal */}
-        <section style={{
-          backgroundColor: '#ffffff',
-          paddingTop: isMobile ? '3rem' : '4rem',
-          paddingBottom: isMobile ? '3rem' : '4rem'
-        }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '1280px',
-            margin: '0 auto',
-            paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
-            paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
-          }}>
-            <div style={{
-              backgroundColor: colors.primary.navy,
-              borderRadius: '1rem',
-              padding: isMobile ? '2rem' : '3rem',
-              color: '#ffffff',
-              textAlign: 'center'
-            }}>
-              <h2 style={{
-                fontSize: isMobile ? '1.875rem' : '2.25rem',
-                fontWeight: '700',
-                marginBottom: '1.5rem'
-              }}>
-                Patient Portal
-              </h2>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.25rem',
-                color: '#d1d5db',
-                marginBottom: '2rem',
-                maxWidth: '700px',
-                margin: '0 auto 2rem'
-              }}>
-                Access your test results, visit summaries, and medical records securely online
-              </p>
-              <div style={{
-                display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
-                gap: '1rem',
-                justifyContent: 'center'
-              }}>
-                <button style={{
-                  backgroundColor: '#ffffff',
-                  color: '#111827',
-                  padding: '0.75rem 2rem',
-                  borderRadius: '0.5rem',
-                  fontWeight: '600',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.3s'
-                }}>
-                  Login to Portal
-                </button>
-                <button style={{
-                  backgroundColor: '#374151',
-                  color: '#ffffff',
-                  padding: '0.75rem 2rem',
-                  borderRadius: '0.5rem',
-                  fontWeight: '600',
-                  border: '2px solid #ffffff',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.3s'
-                }}>
-                  Register for Portal
-                </button>
-              </div>
-              <p style={{
-                fontSize: '0.875rem',
-                color: '#d1d5db',
-                marginTop: '1.5rem'
-              }}>
-                Secure, HIPAA-compliant 24/7 access to your health information
-              </p>
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section style={{
-          backgroundColor: '#f9fafb',
-          paddingTop: isMobile ? '3rem' : '4rem',
-          paddingBottom: isMobile ? '3rem' : '4rem'
-        }}>
+        <section
+          style={{
+            backgroundColor: '#f9fafb',
+            paddingTop: isMobile ? '3rem' : '4rem',
+            paddingBottom: isMobile ? '3rem' : '4rem'
+          }}
+        >
           <div style={{
             width: '100%',
             maxWidth: '1280px',
@@ -436,13 +242,17 @@ export default function PatientsPage() {
             paddingLeft: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem'),
             paddingRight: isMobile ? '1.5rem' : (isTablet ? '2.5rem' : '4rem')
           }}>
-            <h2 style={{
-              fontSize: isMobile ? '1.875rem' : '2.25rem',
-              fontWeight: '700',
-              color: '#111827',
-              marginBottom: '3rem',
-              textAlign: 'center'
-            }}>
+            <h2
+              id="faq"
+              style={{
+                fontSize: isMobile ? '1.875rem' : '2.25rem',
+                fontWeight: '700',
+                color: '#111827',
+                marginBottom: '3rem',
+                textAlign: 'center',
+                scrollMarginTop: '150px'
+              }}
+            >
               Frequently Asked Questions
             </h2>
 

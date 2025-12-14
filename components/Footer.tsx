@@ -109,21 +109,15 @@ export default function Footer() {
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Icon type="phone" size={18} color="#cbd5e1" />
                 <a
-                  href="tel:555-123-4567"
+                  href="tel:862-306-6367"
                   style={{
                     fontSize: '0.875rem',
                     color: '#cbd5e1',
                     textDecoration: 'none'
                   }}
                 >
-                  (555) 123-4567
+                  (862) 306-6367
                 </a>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Icon type="fax" size={18} color="#cbd5e1" />
-                <span style={{ fontSize: '0.875rem', color: '#cbd5e1' }}>
-                  (555) 123-4568
-                </span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Icon type="mail" size={18} color="#cbd5e1" />
@@ -136,20 +130,6 @@ export default function Footer() {
                   }}
                 >
                   info@stratumwoundcare.com
-                </a>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Icon type="emergency" size={18} color={colors.primary.green} />
-                <a
-                  href="tel:555-123-9999"
-                  style={{
-                    fontSize: '0.875rem',
-                    color: colors.primary.green,
-                    textDecoration: 'none',
-                    fontWeight: '600'
-                  }}
-                >
-                  Emergency: (555) 123-9999
                 </a>
               </li>
             </ul>

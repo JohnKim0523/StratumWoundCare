@@ -17,6 +17,20 @@ export default function ServicesPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Scroll to hash element and center it on the page
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay to ensure the page has rendered
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+  }, []);
+
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
@@ -99,36 +113,43 @@ export default function ServicesPage() {
               {
                 title: "Diabetic Foot Ulcers",
                 description: "Comprehensive care for diabetic foot complications including neuropathic and ischemic ulcers. Our specialized approach focuses on preventing amputations and promoting healing.",
-                imageSrc: "/diabetic_foot_ulcer.png"
+                imageSrc: "/diabetic_foot_ulcer.png",
+                id: "diabetic-foot-ulcers"
               },
               {
                 title: "Pressure Injuries",
                 description: "Expert treatment of pressure ulcers (bedsores) at all stages. We provide advanced wound care protocols to heal existing wounds and prevent recurrence.",
-                imageSrc: "/pressure_injury.png"
+                imageSrc: "/pressure_injury.png",
+                id: "pressure-injuries"
               },
               {
                 title: "Wound Infections/Osteomyelitis(Bone Infection)/Cellulitis",
                 description: "Aggressive management of infected wounds with targeted antibiotic therapy, debridement, and advanced wound care techniques.",
-                imageSrc: "/Osteomylitis.png"
+                imageSrc: "/Osteomylitis.png",
+                id: "wound-infections"
               },
               {
                 title: "Venous Leg Ulcers",
                 description: "Specialized treatment for ulcers caused by venous insufficiency, including compression therapy and advanced wound care.",
-                imageSrc: "/Venous_Leg_Ulcers.png"
+                imageSrc: "/Venous_Leg_Ulcers.png",
+                id: "venous-leg-ulcers"
               },
               {
                 title: "Arterial Ulcers",
                 description: "Management of wounds caused by arterial insufficiency with focus on improving circulation and promoting healing.",
-                imageSrc: "/arterial_wounds.png"
+                imageSrc: "/arterial_wounds.png",
+                id: "arterial-ulcers"
               },
               {
                 title: "Surgical Wounds",
                 description: "Post-operative wound care including management of dehiscence, infection, and delayed healing.",
-                imageSrc: "/surgical_wound.png"
+                imageSrc: "/surgical_wound.png",
+                id: "surgical-wounds"
               }
             ].map((wound, index) => (
               <div
                 key={index}
+                id={wound.id}
                 style={{
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
