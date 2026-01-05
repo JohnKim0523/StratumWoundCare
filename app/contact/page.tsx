@@ -149,7 +149,7 @@ export default function ContactPage() {
                 fontSize: isMobile ? '0.875rem' : '1rem',
                 lineHeight: '1.6'
               }}>
-                <a href="tel:862-306-6367" style={{ color: '#111827', fontWeight: '600' }}>(862) 306-6367</a>
+                <a href="tel:484-276-3277" style={{ color: '#111827', fontWeight: '600' }}>(484) 276-3277</a>
               </p>
             </div>
 

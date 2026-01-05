@@ -109,14 +109,14 @@ export default function Footer() {
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Icon type="phone" size={18} color="#cbd5e1" />
                 <a
-                  href="tel:862-306-6367"
+                  href="tel:484-276-3277"
                   style={{
                     fontSize: '0.875rem',
                     color: '#cbd5e1',
                     textDecoration: 'none'
                   }}
                 >
-                  (862) 306-6367
+                  (484) 276-3277
                 </a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
