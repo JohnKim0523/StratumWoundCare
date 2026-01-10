@@ -193,6 +193,29 @@ export default function AboutPage() {
               }}>
                 President
               </p>
+              <p style={{
+                fontSize: isMobile ? '1rem' : '1.125rem',
+                color: '#374151',
+                lineHeight: '1.8',
+                marginBottom: '1.5rem'
+              }}>
+                Steven Mizrachi is a seasoned executive and entrepreneur with a diverse background spanning financial markets, digital advertising, and healthcare services. He began his career in finance, specializing in commodity trading with a focus on natural gas and oil NYMEX futures, developing a strong foundation in market analytics, risk management, and strategic investment. Steven later transitioned into digital advertising, serving as an SVP Partner at TruClear, where he helped drive advertising strategies across major transportation hubs, including Penn Station and the Chicago Transit Authority, blending high-impact media placement with data-driven marketing solutions.
+              </p>
+              <p style={{
+                fontSize: isMobile ? '1rem' : '1.125rem',
+                color: '#374151',
+                lineHeight: '1.8',
+                marginBottom: '1.5rem'
+              }}>
+                His career then expanded into healthcare leadership. As Vice President of Community Relations at AMT, the largest Medicare Part B supplier of advanced wound-care dressings in the country at the time, Steven played a pivotal role in building provider relationships, community partnerships, and national brand presence. Building on this expertise, Steven became President of Revive, a mobile wound-care provider group focused on delivering advanced wound services to patients in the home setting, addressing gaps in continuity of care and improving clinical outcomes outside traditional facilities.
+              </p>
+              <p style={{
+                fontSize: isMobile ? '1rem' : '1.125rem',
+                color: '#374151',
+                lineHeight: '1.8'
+              }}>
+                Currently, Steven is the Owner and CEO of Evolution Wound Management, a mobile wound-care organization dedicated to serving home-based and post-acute populations. Under his leadership, Evolution focuses on compliant, patient-centered care models, operational excellence, and scalable growth across multiple markets. Steven's career reflects a unique blend of financial acumen, operational leadership, and healthcare innovation, positioning him as a forward-thinking leader in the evolving landscape of home-based care.
+              </p>
             </div>
           </div>
 
