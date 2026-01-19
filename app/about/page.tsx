@@ -133,38 +133,64 @@ export default function AboutPage() {
             marginBottom: isMobile ? '3rem' : '4rem',
             border: '1px solid #e5e7eb'
           }}>
-            <div>
-              <h3 style={{
-                fontSize: isMobile ? '1.75rem' : '2rem',
-                fontWeight: 'bold',
-                color: '#111827',
-                marginBottom: '0.5rem'
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile || isTablet ? '1fr' : '300px 1fr',
+              gap: isMobile ? '2rem' : isTablet ? '2.5rem' : '3rem',
+              alignItems: 'start'
+            }}>
+              {/* Photo */}
+              <div style={{
+                borderRadius: '12px',
+                overflow: 'hidden'
               }}>
-                Mark Hoffner
-              </h3>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#6b7280',
-                fontWeight: '600',
-                marginBottom: '1.5rem'
-              }}>
-                Chief Executive Officer
-              </p>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#374151',
-                lineHeight: '1.8',
-                marginBottom: '1.5rem'
-              }}>
-                Mark Hoffner leads Stratum Wound Care with a commitment to turning clinical excellence into tangible patient benefits. Drawing on extensive hands-on experience in wound management, infection prevention, and coordinated care, he guides a multisite network focused on delivering compassionate, high-quality outcomes.
-              </p>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#374151',
-                lineHeight: '1.8'
-              }}>
-                As an executive, Mark builds and mentors cross-functional teams, standardizes best practices, and shapes policies that support sustainable growth and resilient operations. He champions patient-centered care, clinician development, and strategic collaboration to elevate the standard of wound care.
-              </p>
+                <Image
+                  src="/Mark_Hoffman_Headshot.jpg"
+                  alt="Mark Hoffner - Chief Executive Officer"
+                  width={300}
+                  height={400}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block'
+                  }}
+                />
+              </div>
+
+              {/* Bio Content */}
+              <div>
+                <h3 style={{
+                  fontSize: isMobile ? '1.75rem' : '2rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '0.5rem'
+                }}>
+                  Mark Hoffner
+                </h3>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#6b7280',
+                  fontWeight: '600',
+                  marginBottom: '1.5rem'
+                }}>
+                  Chief Executive Officer
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#374151',
+                  lineHeight: '1.8',
+                  marginBottom: '1.5rem'
+                }}>
+                  Mark Hoffner leads Stratum Wound Care with a commitment to turning clinical excellence into tangible patient benefits. Drawing on extensive hands-on experience in wound management, infection prevention, and coordinated care, he guides a multisite network focused on delivering compassionate, high-quality outcomes.
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#374151',
+                  lineHeight: '1.8'
+                }}>
+                  As an executive, Mark builds and mentors cross-functional teams, standardizes best practices, and shapes policies that support sustainable growth and resilient operations. He champions patient-centered care, clinician development, and strategic collaboration to elevate the standard of wound care.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -236,20 +262,17 @@ export default function AboutPage() {
               {/* Photo */}
               <div style={{
                 borderRadius: '12px',
-                overflow: 'hidden',
-                position: 'relative',
-                minHeight: '300px',
-                backgroundColor: '#f3f4f6'
+                overflow: 'hidden'
               }}>
                 <Image
                   src="/justin_kleppe.jpg"
                   alt="Justin Kleppe FNP, MSN, RN - Director of Clinical Services"
                   width={300}
-                  height={300}
+                  height={400}
                   style={{
                     width: '100%',
                     height: 'auto',
-                    objectFit: 'cover'
+                    display: 'block'
                   }}
                 />
               </div>
@@ -307,46 +330,72 @@ export default function AboutPage() {
             marginBottom: isMobile ? '3rem' : '4rem',
             border: '1px solid #e5e7eb'
           }}>
-            <div>
-              <h3 style={{
-                fontSize: isMobile ? '1.75rem' : '2rem',
-                fontWeight: 'bold',
-                color: '#111827',
-                marginBottom: '0.5rem'
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile || isTablet ? '1fr' : '300px 1fr',
+              gap: isMobile ? '2rem' : isTablet ? '2.5rem' : '3rem',
+              alignItems: 'start'
+            }}>
+              {/* Photo */}
+              <div style={{
+                borderRadius: '12px',
+                overflow: 'hidden'
               }}>
-                Joshua Walla
-              </h3>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#6b7280',
-                fontWeight: '600',
-                marginBottom: '1.5rem'
-              }}>
-                Chief Operating Officer
-              </p>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#374151',
-                lineHeight: '1.8',
-                marginBottom: '1.5rem'
-              }}>
-                Joshua Walla serves as the Chief Operating Officer of Stratum Wound Care, bringing a strong foundation in surgical supply chain operations and clinical support management to the organization. With experience optimizing surgical workflows, managing procedural-area inventory, and streamlining operational systems across healthcare settings, Joshua ensures that Stratum delivers efficient, reliable, and patient-focused wound care services.
-              </p>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#374151',
-                lineHeight: '1.8',
-                marginBottom: '1.5rem'
-              }}>
-                In his role as COO, Joshua oversees the coordination of our multidisciplinary clinical teams, ensuring that every partner facility receives consistent, high-quality wound-care rounds and evidence-based treatment protocols. His expertise in operational efficiency and resource management allows Stratum Wound Care to provide cost-effective services without compromising the clinical excellence that improves healing outcomes for residents and patients.
-              </p>
-              <p style={{
-                fontSize: isMobile ? '1rem' : '1.125rem',
-                color: '#374151',
-                lineHeight: '1.8'
-              }}>
-                Guided by a mission to improve quality of life for every patient served, he continues to build systems that uphold Stratum's commitment to delivering unparalleled wound-care support across a wide range of healthcare settings and patient populations.
-              </p>
+                <Image
+                  src="/Joshua_Walla_Headshot.jpg"
+                  alt="Joshua Walla - Chief Operating Officer"
+                  width={300}
+                  height={400}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block'
+                  }}
+                />
+              </div>
+
+              {/* Bio Content */}
+              <div>
+                <h3 style={{
+                  fontSize: isMobile ? '1.75rem' : '2rem',
+                  fontWeight: 'bold',
+                  color: '#111827',
+                  marginBottom: '0.5rem'
+                }}>
+                  Joshua Walla
+                </h3>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#6b7280',
+                  fontWeight: '600',
+                  marginBottom: '1.5rem'
+                }}>
+                  Chief Operating Officer
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#374151',
+                  lineHeight: '1.8',
+                  marginBottom: '1.5rem'
+                }}>
+                  Joshua Walla serves as the Chief Operating Officer of Stratum Wound Care, bringing a strong foundation in surgical supply chain operations and clinical support management to the organization. With experience optimizing surgical workflows, managing procedural-area inventory, and streamlining operational systems across healthcare settings, Joshua ensures that Stratum delivers efficient, reliable, and patient-focused wound care services.
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#374151',
+                  lineHeight: '1.8',
+                  marginBottom: '1.5rem'
+                }}>
+                  In his role as COO, Joshua oversees the coordination of our multidisciplinary clinical teams, ensuring that every partner facility receives consistent, high-quality wound-care rounds and evidence-based treatment protocols. His expertise in operational efficiency and resource management allows Stratum Wound Care to provide cost-effective services without compromising the clinical excellence that improves healing outcomes for residents and patients.
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '1rem' : '1.125rem',
+                  color: '#374151',
+                  lineHeight: '1.8'
+                }}>
+                  Guided by a mission to improve quality of life for every patient served, he continues to build systems that uphold Stratum's commitment to delivering unparalleled wound-care support across a wide range of healthcare settings and patient populations.
+                </p>
+              </div>
             </div>
           </div>
 
