@@ -7,9 +7,9 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Stratum Wound Care - Advanced Wound Healing in Pennsylvania",
+  title: "Stratum Wound Care - Advanced Wound Healing",
   description: "Providing advanced wound healing and limb preservation to help patients stay safe, healthy, and home. Specialized care for diabetic wounds, pressure ulcers, and more.",
-  keywords: "wound care, Pennsylvania, diabetic wounds, pressure ulcers, surgical wounds, limb preservation",
+  keywords: "wound care, diabetic wounds, pressure ulcers, surgical wounds, limb preservation",
 };
 
 export default function RootLayout({

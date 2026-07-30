@@ -250,7 +250,7 @@ export default function Home() {
                       marginBottom: isMobile ? '1rem' : '1.5rem'
                     }}>
                       At Stratum Wound Care, we specialize in providing comprehensive wound management services
-                      to patients throughout Pennsylvania. Our team of experienced healthcare professionals is
+                      to our patients. Our team of experienced healthcare professionals is
                       dedicated to healing complex wounds and preventing amputations.
                     </p>
                     <p style={{
@@ -310,7 +310,7 @@ export default function Home() {
                       color: '#374151',
                       lineHeight: '1.8'
                     }}>
-                      Founded by Mark Hoffner, Stratum Wound Care is built on an unwavering commitment to our patients and a promise to the broader healthcare community. We dedicate our absolute best to every individual we serve, operating with integrity and pride. At Stratum, we are proud to restore patient health through the exceptional care delivered by our expert team.
+                      Stratum Wound Care is built on an unwavering commitment to our patients and a promise to the broader healthcare community. We dedicate our absolute best to every individual we serve, operating with integrity and pride. At Stratum, we are proud to restore patient health through the exceptional care delivered by our expert team.
                     </p>
                   </div>
                 )}
