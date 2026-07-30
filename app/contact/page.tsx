@@ -192,48 +192,6 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Location */}
-            <div style={{
-              backgroundColor: '#f9fafb',
-              borderRadius: '12px',
-              padding: isMobile ? '1.5rem' : '2rem',
-              border: '1px solid #e5e7eb'
-            }}>
-              <div style={{ marginBottom: '1rem' }}>
-                <Icon type="mapPin" size={40} color="#6b7280" />
-              </div>
-              <h3 style={{
-                fontSize: isMobile ? '1.25rem' : '1.5rem',
-                fontWeight: 'bold',
-                color: '#111827',
-                marginBottom: '1rem'
-              }}>
-                Location
-              </h3>
-              <p style={{
-                color: '#374151',
-                fontSize: isMobile ? '0.875rem' : '1rem',
-                lineHeight: '1.6',
-                marginBottom: '0.5rem'
-              }}>
-                55R Broadway<br />
-                Bangor, PA 18013
-              </p>
-              <Link
-                href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: '#111827',
-                  fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  textDecoration: 'underline'
-                }}
-              >
-                Get Directions →
-              </Link>
-            </div>
-
             {/* Office Hours */}
             <div style={{
               backgroundColor: '#f9fafb',
@@ -609,55 +567,6 @@ export default function ContactPage() {
 
             {/* Right: Additional Information */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '2rem' : '3rem' }}>
-              {/* Interactive Map */}
-              <div>
-                <h3 style={{
-                  fontSize: isMobile ? '1.5rem' : '2rem',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginBottom: '1.5rem'
-                }}>
-                  Visit Our Clinic
-                </h3>
-                <div style={{
-                  width: '100%',
-                  height: isMobile ? '250px' : '300px',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
-                }}>
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.5!2d-75.2063!3d40.8653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c43e5d5c5d5d5d%3A0x5d5d5d5d5d5d5d5d!2s55R%20Broadway%2C%20Bangor%2C%20PA%2018013!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Stratum Wound Care Location"
-                  />
-                </div>
-                <p style={{
-                  marginTop: '1rem',
-                  fontSize: '0.875rem',
-                  color: '#6b7280',
-                  textAlign: 'center'
-                }}>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color: colors.primary.blue,
-                      textDecoration: 'underline',
-                      fontWeight: '600'
-                    }}
-                  >
-                    Open in Google Maps →
-                  </a>
-                </p>
-              </div>
-
               {/* Telehealth Section */}
               <div style={{
                 backgroundColor: '#ffffff',

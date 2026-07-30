@@ -1144,48 +1144,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Location */}
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <Icon type="mapPin" size={24} color={colors.primary.green} />
-                  <h4 style={{
-                    fontSize: '1.125rem',
-                    fontWeight: '600',
-                    color: '#ffffff',
-                    margin: 0
-                  }}>
-                    Location
-                  </h4>
-                </div>
-                <p style={{
-                  fontSize: '1rem',
-                  color: '#d1d5db',
-                  marginLeft: '2.5rem',
-                  lineHeight: '1.6'
-                }}>
-                  55R Broadway<br />
-                  Bangor, PA 18013
-                </p>
-                <Link
-                  href="https://www.google.com/maps/search/?api=1&query=55R+Broadway+Bangor+PA+18013"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    marginLeft: '2.5rem',
-                    marginTop: '0.5rem',
-                    color: colors.primary.green,
-                    fontSize: '0.875rem',
-                    textDecoration: 'underline',
-                    transition: 'color 0.3s'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = colors.secondary.lightGreen}
-                  onMouseLeave={(e) => e.currentTarget.style.color = colors.primary.green}
-                >
-                  Get Directions →
-                </Link>
-              </div>
-
               {/* Office Hours */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>

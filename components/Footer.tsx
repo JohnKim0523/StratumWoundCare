@@ -40,21 +40,6 @@ export default function Footer() {
             }}>
               Providing advanced wound healing and limb preservation to help patients stay safe, healthy, and home.
             </p>
-            <div style={{ marginTop: '1.5rem' }}>
-              <p style={{
-                fontSize: '0.875rem',
-                color: '#94a3b8',
-                marginBottom: '0.5rem'
-              }}>
-                55R Broadway
-              </p>
-              <p style={{
-                fontSize: '0.875rem',
-                color: '#94a3b8'
-              }}>
-                Bangor, PA 18013
-              </p>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -211,7 +196,7 @@ export default function Footer() {
             <span>•</span>
             <span>Medicare & Medicaid Certified</span>
             <span>•</span>
-            <span>Licensed by PA Department of Health</span>
+            <span>Licensed by the Department of Health</span>
           </div>
         </div>
       </div>
