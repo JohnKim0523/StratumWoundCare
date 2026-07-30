@@ -208,7 +208,7 @@ export default function PatientsPage() {
                   color: '#111827',
                   marginBottom: '1.5rem'
                 }}>
-                  What to Bring to Your First Appointment
+                  What You Will Need Ready During Your First Appointment
                 </h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                   {checklist.map((item, index) => (

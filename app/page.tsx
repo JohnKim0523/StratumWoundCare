@@ -1117,7 +1117,7 @@ export default function Home() {
                   marginLeft: '2.5rem',
                   lineHeight: '1.6'
                 }}>
-                  (862) 306-6367
+                  (484) 276-3277
                 </p>
               </div>
 
