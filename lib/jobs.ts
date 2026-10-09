@@ -55,7 +55,7 @@ export const woundCarePhysicianPerDiem: Job = {
     {
       heading: "What We're Looking For",
       bullets: [
-        'Board-certified/eligible Physician with wound care experience',
+        'Board-certified/eligible Physician, Nurse Practitioner (NP), or Physician Assistant (PA) with wound care experience',
         'Strong clinical knowledge of wound assessment and treatment',
         'Preferred: Experience with advanced treatment applications and modalities',
         'Comfortable working in a home care/field-based setting',
