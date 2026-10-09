@@ -5,9 +5,11 @@ import PageTransition from '@/components/PageTransition';
 import Link from 'next/link';
 import Icon from '@/components/Icon';
 import { colors } from '@/lib/colors';
+import { openJobs } from '@/lib/jobs';
 
 export default function CareersPage() {
   const [windowWidth, setWindowWidth] = useState(0);
+  const [expandedJob, setExpandedJob] = useState<string | null>(openJobs[0]?.slug ?? null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,6 +38,20 @@ export default function CareersPage() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleApplyForPosition = (positionValue: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      position: positionValue,
+    }));
+
+    if (typeof document !== 'undefined') {
+      const target = document.getElementById('application-form');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -369,9 +385,238 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Application Section */}
+      {/* Open Positions Section */}
       <section style={{
+        backgroundColor: '#f9fafb',
+        paddingTop: isMobile ? '3rem' : '5rem',
+        paddingBottom: isMobile ? '3rem' : '5rem',
+        borderTop: '1px solid #e5e7eb'
+      }}>
+        <div style={{
+          maxWidth: '1400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem',
+          paddingRight: isMobile ? '1.5rem' : isTablet ? '2.5rem' : '4rem'
+        }}>
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.25rem' : '2.5rem',
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            Open Positions
+          </h2>
+          <p style={{
+            fontSize: isMobile ? '1rem' : '1.125rem',
+            color: '#6b7280',
+            textAlign: 'center',
+            marginBottom: isMobile ? '2.5rem' : '3.5rem',
+            maxWidth: '700px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Current opportunities with Stratum Wound Care
+          </p>
+
+          <div style={{
+            maxWidth: '900px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem'
+          }}>
+            {openJobs.map((job) => {
+              const isExpanded = expandedJob === job.slug;
+
+              return (
+                <div
+                  key={job.slug}
+                  id={job.slug}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    borderRadius: '12px',
+                    padding: isMobile ? '1.5rem' : '2.5rem',
+                    border: '1px solid #e5e7eb',
+                    boxShadow: '0 1px 3px rgba(15, 23, 42, 0.06)'
+                  }}
+                >
+                  <h3 style={{
+                    fontSize: isMobile ? '1.5rem' : '1.875rem',
+                    fontWeight: 'bold',
+                    color: '#111827',
+                    marginBottom: '0.75rem'
+                  }}>
+                    {job.title}
+                  </h3>
+
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    gap: isMobile ? '0.75rem' : '1.25rem',
+                    marginBottom: '1.25rem'
+                  }}>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: isMobile ? '0.875rem' : '1rem',
+                      fontWeight: '600',
+                      color: colors.secondary.darkBlue
+                    }}>
+                      <Icon type="mapPin" size={18} color={colors.secondary.darkBlue} />
+                      {job.location}
+                    </span>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: isMobile ? '0.875rem' : '1rem',
+                      fontWeight: '600',
+                      color: colors.secondary.darkGreen
+                    }}>
+                      <Icon type="dollarSign" size={18} color={colors.secondary.darkGreen} />
+                      {job.pay}
+                    </span>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: isMobile ? '0.875rem' : '1rem',
+                      fontWeight: '600',
+                      color: '#6b7280'
+                    }}>
+                      <Icon type="clock" size={18} color="#6b7280" />
+                      Per Diem
+                    </span>
+                  </div>
+
+                  <p style={{
+                    fontSize: isMobile ? '0.9375rem' : '1.0625rem',
+                    color: '#374151',
+                    lineHeight: '1.7',
+                    marginBottom: '1.5rem'
+                  }}>
+                    {job.summary}
+                  </p>
+
+                  {isExpanded && (
+                    <div id={`${job.slug}-details`} style={{
+                      borderTop: '1px solid #e5e7eb',
+                      paddingTop: '1.5rem',
+                      marginBottom: '1.5rem'
+                    }}>
+                      {job.sections.map((section) => (
+                        <div key={section.heading} style={{ marginBottom: '1.5rem' }}>
+                          <h4 style={{
+                            fontSize: isMobile ? '1.0625rem' : '1.1875rem',
+                            fontWeight: 'bold',
+                            color: '#111827',
+                            marginBottom: '0.75rem'
+                          }}>
+                            {section.heading}
+                          </h4>
+                          {section.body && (
+                            <p style={{
+                              fontSize: isMobile ? '0.875rem' : '1rem',
+                              color: '#374151',
+                              lineHeight: '1.7'
+                            }}>
+                              {section.body}
+                            </p>
+                          )}
+                          {section.bullets && (
+                            <ul style={{
+                              listStyleType: 'disc',
+                              paddingLeft: '1.25rem',
+                              margin: 0
+                            }}>
+                              {section.bullets.map((bullet) => (
+                                <li
+                                  key={bullet}
+                                  style={{
+                                    fontSize: isMobile ? '0.875rem' : '1rem',
+                                    color: '#374151',
+                                    lineHeight: '1.7',
+                                    marginBottom: '0.375rem'
+                                  }}
+                                >
+                                  {bullet}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+
+                      <p style={{
+                        fontSize: isMobile ? '0.875rem' : '1rem',
+                        color: '#374151',
+                        lineHeight: '1.7',
+                        fontWeight: '600',
+                        margin: 0
+                      }}>
+                        {job.closing}
+                      </p>
+                    </div>
+                  )}
+
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: isMobile ? 'column' : 'row',
+                    alignItems: isMobile ? 'stretch' : 'center',
+                    gap: '1rem'
+                  }}>
+                    <button
+                      type="button"
+                      onClick={() => handleApplyForPosition(job.positionValue)}
+                      style={{
+                        background: colors.gradients.blueGreen,
+                        color: '#ffffff',
+                        padding: isMobile ? '0.875rem 1.5rem' : '0.875rem 2rem',
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        fontSize: '1rem',
+                        border: `2px solid ${colors.primary.blue}`,
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(8, 145, 220, 0.3)'
+                      }}
+                    >
+                      Apply Now
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExpandedJob(isExpanded ? null : job.slug)}
+                      style={{
+                        backgroundColor: 'transparent',
+                        color: colors.primary.navy,
+                        padding: isMobile ? '0.875rem 1.5rem' : '0.875rem 2rem',
+                        borderRadius: '8px',
+                        fontWeight: '600',
+                        fontSize: '1rem',
+                        border: `2px solid ${colors.primary.navy}`,
+                        cursor: 'pointer'
+                      }}
+                      aria-expanded={isExpanded}
+                      aria-controls={`${job.slug}-details`}
+                    >
+                      {isExpanded ? 'Hide Full Details' : 'View Full Details'}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Application Section */}
+      <section id="application-form" style={{
         backgroundColor: '#ffffff',
+        scrollMarginTop: '130px',
         paddingTop: isMobile ? '3rem' : '5rem',
         paddingBottom: isMobile ? '3rem' : '5rem'
       }}>
@@ -515,6 +760,11 @@ export default function CareersPage() {
                   }}
                 >
                   <option value="">Select a position</option>
+                  {openJobs.map((job) => (
+                    <option key={job.positionValue} value={job.positionValue}>
+                      {job.positionLabel}
+                    </option>
+                  ))}
                   <option value="physician">Physician</option>
                   <option value="nurse-practitioner">Nurse Practitioner (NP)</option>
                   <option value="registered-nurse">Registered Nurse (RN)</option>
